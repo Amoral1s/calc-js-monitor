@@ -1,0 +1,201 @@
+
+body
+	background-color: gray
+	display: flex
+	justify-content: center
+	align-items: center
+	height: 100%
+	min-height: 100vh
+
+#calc
+	background-color: #fff
+	width: 100%
+	max-width: 1170px
+	padding-left: 15px
+	padding-right: 15px
+	min-height: 600px
+	box-shadow: 0 0 5px rgba(#000, .2)
+	padding: 60px
+	padding-bottom: 120px
+.calc
+	display: flex
+	justify-content: space-between
+	align-items: center
+	position: relative
+	&-nav
+		position: absolute
+		bottom: -85px
+		height: 60px
+		width: 200px
+		background-color: #742a92
+		display: none
+		justify-content: center
+		align-items: center
+		color: #ffffff
+		font-weight: 700
+		transition: 0.3s
+		cursor: pointer
+		&:hover
+			background-color: #000
+			transition: 0.3s
+	&__next
+		right: 0
+	&-step
+		display: none
+	&-page
+		display: block
+		background-color: #fff
+		z-index: 1
+		border: 1px solid #000000
+		margin-bottom: 60px
+		h2
+			margin-bottom: 30px
+			font-size: 26px
+			line-height: 1.2
+		b
+			display: block
+			margin-bottom: 30px
+			font-size: 22px
+		
+		&__radio
+			margin-right: 30px
+			margin-bottom: 30px
+			width: 17%
+			input
+				height: 20px
+				width: 20px
+				padding: 0
+				display: none
+				&:checked + label
+					background-color: #000000
+					color: #ffffff
+			label
+				display: flex
+				align-items: center
+				justify-content: center
+				box-shadow: 0 0 5px rgba(#000, .1)
+				padding: 20px
+				cursor: pointer
+				transition: 0.3s
+				&:checked
+					background-color: #000
+			
+				&:hover
+					background-color: #742a92
+					color: #ffffff
+					p, b 
+						color: #ffffff
+				p
+					font-size: 20px
+				b
+					margin: 0 10px
+					font-size: 16px
+		&__item
+			display: flex
+			justify-content: space-between
+			align-items: center
+			cursor: pointer
+			flex-wrap: wrap
+		&__type
+			width: 100%
+		&__wrap
+			width: 100%
+			display: flex
+			justify-content: space-between
+			align-items: start
+			margin-bottom: 30px
+		&__left
+			width: 48%
+		&__right
+			width: 48%
+			display: flex
+			justify-content: center
+			align-items: center
+			min-height: 270px
+			border: 1px solid #000000
+			div
+				display: none
+				img
+					max-width: 470px
+			div:first-child
+				display: block
+		&__plata
+			width: 100%
+		&__gabarity
+			width: 100%
+			label
+				b
+					width: 50%
+			input
+				display: block
+				height: 60px
+				width: 50%
+				font-size: 24px
+				padding-left: 20px
+		&__border
+			border: 3px solid #000000
+			width: 100%
+			max-width: 500px
+			height: 300px
+			border-radius: 10px
+			margin: 20px
+			position: relative
+			div
+				position: absolute
+				top: 40px
+				left: 40px
+				border: 2px solid #000000
+				height: 220px
+				width: 420px
+		&__right-paint
+			display: block
+			div.calc-page__painting
+				display: block
+				b
+					width: 50%
+				input
+					display: block
+					width: 50%
+					height: 60px
+					padding-left: 20px
+					font-size: 24px
+		&__painting
+			width: 100%
+			margin-right: 0
+		&__dop
+			display: block
+			width: 48%
+			cursor: pointer
+			b
+				width: 50%
+			input
+				display: block
+				width: 50%
+				height: 60px
+				padding-left: 20px
+				font-size: 24px
+	&__item
+		display: flex
+		flex-direction: column
+		width: calc(-60px + 23%)
+		box-shadow: 0 0 5px rgba(#000, .2)
+		padding: 30px
+		min-height: 400px
+		h2
+			text-align: center
+			font-size: 24px
+			margin-top: 20px
+
+
+	
+@import "media1200"
+@import "media992"
+@import "media768"
+@import "media578"
+//@import "media440"
+//@import "media380"
+//@import "media360"
+
+
+
+
