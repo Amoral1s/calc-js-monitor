@@ -22,13 +22,15 @@ body
 	justify-content: space-between
 	align-items: center
 	position: relative
+	&-startpage
+		display: none
 	&-nav
 		position: absolute
 		bottom: -85px
 		height: 60px
 		width: 200px
 		background-color: #742a92
-		display: none
+		display: flex
 		justify-content: center
 		align-items: center
 		color: #ffffff
@@ -38,16 +40,15 @@ body
 		&:hover
 			background-color: #000
 			transition: 0.3s
-	&__next
+	&-next
 		right: 0
 	&-step
-		display: none
 	&-page
-		display: block
+		display: none
 		background-color: #fff
 		z-index: 1
-		border: 1px solid #000000
 		margin-bottom: 60px
+		
 		h2
 			margin-bottom: 30px
 			font-size: 26px
@@ -181,6 +182,12 @@ body
 		box-shadow: 0 0 5px rgba(#000, .2)
 		padding: 30px
 		min-height: 400px
+		transition: 0.3s
+		cursor: pointer
+		&:hover
+			background-color: #742a92
+			h2
+				color: #ffffff
 		h2
 			text-align: center
 			font-size: 24px
