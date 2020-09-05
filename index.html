@@ -34,12 +34,12 @@
     </div>
     <div class="calc-startpage">
       <div class="calc calc-page container" style="display: block;">
-        <div class="calc-prev calc-nav">
+        <button class="calc-prev calc-nav">
           Назад
-        </div>
-        <div class="calc-next calc-nav">
+        </button>
+        <button class="calc-next calc-nav" disabled>
           Слeдующий шаг
-        </div>
+        </button>
         <h2>
           Шаг 2. Настенный экран
         </h2>
@@ -48,47 +48,47 @@
         </b>
         <div class="calc-page__item">
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-19" name="diagonal">
+            <input class="nast-diag" type="radio" id="radio-diag-19" data-diag="19" data-width="396" data-height="324" name="diagonal">
             <label for="radio-diag-19"><p>19"</p> <b>396 - 324мм</b> </label>
           </div>
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-21" name="diagonal">
-            <label for="radio-diag2-21"><p>21.5"</p> <b>495 - 292мм</b> </label>
+            <input class="nast-diag" type="radio" id="radio-diag-23" data-diag="21.5" data-width="495" data-height="292" name="diagonal">
+            <label for="radio-diag-23"><p>21.5"</p> <b>495 - 292мм</b></label>
           </div>
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-23" name="diagonal">
+            <input class="nast-diag" type="radio" id="radio-diag-23" data-diag="23.8" data-width="535" data-height="313" name="diagonal">
             <label for="radio-diag-23"><p>23.8"</p> <b>535 - 313мм</b></label>
           </div>
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-27" name="diagonal">
+            <input class="nast-diag" type="radio" id="radio-diag-27" data-diag="27" data-width="640" data-height="368" name="diagonal">
             <label for="radio-diag-27"><p>27"</p> <b>630 - 368мм</b></label>
           </div>
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-32" name="diagonal">
+            <input class="nast-diag" type="radio" id="radio-diag-32" data-diag="32" data-width="719" data-height="413" name="diagonal">
             <label for="radio-diag-32"><p>32"</p> <b>719 - 413мм</b> </label>
           </div>
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-43" name="diagonal">
+            <input class="nast-diag" type="radio" id="radio-diag-43" data-diag="43" data-width="963" data-height="558" name="diagonal">
             <label for="radio-diag-43"><p>43"</p> <b>963 - 558мм</b> </label>
           </div>
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-50" name="diagonal">
+            <input class="nast-diag" type="radio" id="radio-diag-50" data-diag="59" data-width="1115" data-height="638" name="diagonal">
             <label for="radio-diag-50"><p>50"</p> <b>1115 - 638мм</b> </label>
           </div>
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-55" name="diagonal">
+            <input class="nast-diag" type="radio" id="radio-diag-55" data-diag="55" data-width="1235" data-height="706" name="diagonal">
             <label for="radio-diag-55"><p>55"</p> <b>1235-706мм</b> </label>
           </div>
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-65" name="diagonal">
+            <input class="nast-diag" type="radio" id="radio-diag-65" data-diag="65" data-width="1445" data-height="827" name="diagonal">
             <label for="radio-diag-65"><p>65"</p> <b>1445 - 827мм</b> </label>
           </div>
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-75" name="diagonal">
+            <input class="nast-diag" type="radio" id="radio-diag-75" data-diag="75" data-width="1670" data-height="930" name="diagonal">
             <label for="radio-diag-75"><p>75"</p> <b>1670 - 930мм</b></label>
           </div>
           <div class="calc-page__radio">
-            <input class="nast-diag" type="radio" id="radio-diag-86" name="diagonal">
+            <input class="nast-diag" type="radio" id="radio-diag-86" data-diag="86" data-width="1985" data-height="1138" name="diagonal">
             <label for="radio-diag-86"><p>86"</p> <b>1985 - 1138мм </b> </label>
           </div>
           
@@ -97,12 +97,12 @@
       <!-- cala page 2-->
   
       <div class="calc calc-page container">
-        <div class="calc-prev calc-nav">
+        <button class="calc-prev calc-nav">
           Назад
-        </div>
-        <div class="calc-next calc-nav">
+        </button>
+        <button class="calc-next calc-nav" disabled>
           Слeдующий шаг
-        </div>
+        </button>
         <h2>
           Шаг 3. Настенный экран
         </h2>
@@ -114,15 +114,15 @@
             <div class="calc-page__wrap">
               <div class="calc-page__left">
                 <div class="calc-page__radio calc-page__plata">
-                  <input class="nast-plate" type="radio" id="radio-plata-invertor" name="diagonal">
+                  <input class="nast-plate" type="radio" id="radio-plata-invertor" data-deep="1" data-title="Под инвертор (прямая тыловая часть с внутренним отсеком для HDMI\VGA  инвертора)" name="diagonal">
                   <label for="radio-plata-invertor"><b>Под инвертор (прямая тыловая часть с внутренним отсеком для HDMI\VGA  инвертора)</b> </label>
                 </div>
                 <div class="calc-page__radio calc-page__plata">
-                  <input class="nast-plate" type="radio" id="radio-plata-tx" name="diagonal">
+                  <input class="nast-plate" type="radio" id="radio-plata-tx" data-deep="2" data-title="Под мат. плату фром фактора ThinITX (тонкая плата с типовым размером 190*190 мм) с дверцей" name="diagonal">
                   <label for="radio-plata-tx"><b>Под мат. плату фром фактора ThinITX (тонкая плата с типовым размером 190*190 мм) с дверцей</b> </label>
                 </div>
                 <div class="calc-page__radio calc-page__plata">
-                  <input class="nast-plate" type="radio" id="radio-plata-matx" name="diagonal">
+                  <input class="nast-plate" type="radio" id="radio-plata-matx" data-deep="3" data-title="Под мат. плату mATX (с блоком питания ATX или SFX) с дверцей" name="diagonal">
                   <label for="radio-plata-matx"><b>Под мат. плату mATX (с блоком питания ATX или SFX) с дверцей</b> </label>
                 </div>
               </div>
@@ -140,13 +140,13 @@
       <!-- cala page3-->
   
   
-      <div class="calc calc-page container">
-        <div class="calc-prev calc-nav">
+      <div class="calc calc-page novalid container">
+        <button class="calc-prev calc-nav">
           Назад
-        </div>
-        <div class="calc-next calc-nav">
+        </button>
+        <button class="calc-next calc-nav" disabled>
           Слeдующий шаг
-        </div>
+        </button>
         <h2>
           Шаг 4. Настенный экран
         </h2>
@@ -179,13 +179,13 @@
       </div>
       <!-- cala page4-->
   
-      <div class="calc calc-page container">
-        <div class="calc-prev calc-nav">
+      <div class="calc calc-page novalid container">
+        <button class="calc-prev calc-nav">
           Назад
-        </div>
-        <div class="calc-next calc-nav">
+        </button>
+        <button class="calc-next calc-nav" disabled>
           Слeдующий шаг
-        </div>
+        </button>
         <h2>
           Шаг 5. Настенный экран
         </h2>
@@ -215,12 +215,12 @@
       <!-- cala page5-->
   
       <div class="calc calc-page container">
-        <div class="calc-prev calc-nav">
+        <button class="calc-prev calc-nav">
           Назад
-        </div>
-        <div class="calc-next calc-nav">
+        </button>
+        <button class="calc-next calc-nav" disabled>
           Слeдующий шаг
-        </div>
+        </button>
         <h2>
           Шаг 6. Настенный экран
         </h2>
@@ -250,12 +250,12 @@
       <!-- cala page6-->
   
       <div class="calc calc-page container">
-        <div class="calc-prev calc-nav">
+        <button class="calc-prev calc-nav">
           Назад
-        </div>
-        <div class="calc-next calc-nav">
+        </button>
+        <button class="calc-next calc-nav" disabled>
           Слeдующий шаг
-        </div>
+        </button>
         <h2>
           Шаг 7. Настенный экран
         </h2>
@@ -266,18 +266,21 @@
           <div class="calc-page__left calc-page__paint-wrap">
             
             <div class="calc-page__radio calc-page__painting">
+              <input class="nast-paint" type="radio" min="200" value="200" data-pain="Покраска не требуется"  id="paint-none" name="diagonal">
               <label for="paint-none"><b>Покраска не требуется</b>
-                <input class="nast-paint" type="radio" min="200" value="200"  id="paint-none" name="diagonal">
+                
               </label>
             </div>
             <div class="calc-page__radio calc-page__painting">
-              <label for="paint-none"><b>Требуется покраска, но цвет обсудим с менеджером</b>
-                <input class="nast-paint" type="radio" min="200" value="200"  id="paint-none" name="diagonal">
+              <input class="nast-paint" type="radio" min="200" value="200" data-pain="Покраска нужна, обсуждать с менеджером"  id="paint-manager" name="diagonal">
+              <label for="paint-manager"><b>Требуется покраска, но цвет обсудим с менеджером</b>
+                
               </label>
             </div>
             <div class="calc-page__radio calc-page__painting">
-              <label for="paint-none"><b>Требуется покраска, знаю точный цвет формата RAL</b>
-                <input class="nast-paint" type="radio" min="200" value="200"  id="paint-none" name="diagonal">
+              <input class="nast-paint paint-ral" type="radio" min="200" value="200" data-pain="Покраска нужна, цвета RAL предоставлены"  id="paint-ral" name="diagonal">
+              <label for="paint-ral"><b>Требуется покраска, знаю точный цвет формата RAL</b>
+                
               </label>
             </div>
             
@@ -286,17 +289,17 @@
           <div class="calc-page__right calc-page__right-paint">
             <div class="calc-page__radio calc-page__painting">
               <label><b>Выберите цвет корпуса по каталогу RAL</b>
-                <input class="nast-screen" type="number"  id="screen-size-width" name="diagonal">
+                <input class="nast-ral" type="number"  id="" name="diagonal">
               </label>
             </div>
             <div class="calc-page__radio calc-page__painting">
               <label><b>Цвет рамы + лицевой части</b>
-                <input class="nast-screen" type="number"  id="screen-size-width" name="diagonal">
+                <input class="nast-ral" type="number"  id="" name="diagonal">
               </label>
             </div>
             <div class="calc-page__radio calc-page__painting">
               <label><b>Цвет тыловой части корпуса</b>
-                <input class="nast-screen" type="number"  id="screen-size-width" name="diagonal">
+                <input class="nast-ral" type="number"  id="" name="diagonal">
               </label>
             </div>
           </div>
@@ -304,13 +307,13 @@
       </div>
       <!-- cala page7-->
   
-      <div class="calc calc-page container">
-        <div class="calc-prev calc-nav">
+      <div class="calc calc-page novalid container">
+        <button class="calc-prev calc-nav">
           Назад
-        </div>
-        <div class="calc-next calc-nav">
+        </button>
+        <button class="calc-next calc-nav" disabled>
           Слeдующий шаг
-        </div>
+        </button>
         <h2>
           Шаг 8. Настенный экран
         </h2>
@@ -319,13 +322,13 @@
         </b>
         <div class="calc-page__wrap">
           <div class="calc-page__radio calc-page__dop">
-            <label for="paint-none"><b>Светодиодная подсветка по периметру корпуса</b>
-              <input class="nast-paint" type="checkbox"  id="paint-none" name="diagonal">
+            <label for="nast-diod"><b>Светодиодная подсветка по периметру корпуса</b>
+              <input class="nast-diod" type="checkbox"  id="nast-diod" name="diagonal">
             </label>
           </div>
           <div class="calc-page__radio calc-page__dop">
-            <label for="paint-none"><b>Основание напольное (без люка)</b>
-              <input class="nast-paint" type="checkbox"  id="paint-none" name="diagonal">
+            <label for="nast-floor"><b>Основание напольное (без люка)</b>
+              <input class="nast-floor" type="checkbox"  id="nast-floor" name="diagonal">
             </label>
           </div>
         </div>

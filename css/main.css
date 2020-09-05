@@ -43,6 +43,21 @@ body {
   font-weight: 700;
   transition: 0.3s;
   cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border: none;
+}
+
+.calc-nav:focus {
+  outline: none;
+}
+
+.calc-nav:disabled {
+  background-color: #b1b1b1;
+}
+
+.calc-nav:disabled:hover {
+  background-color: #b1b1b1;
 }
 
 .calc-nav:hover {
@@ -99,6 +114,10 @@ body {
   padding: 20px;
   cursor: pointer;
   transition: 0.3s;
+}
+
+.calc-page__radio label input {
+  cursor: pointer;
 }
 
 .calc-page__radio label:checked {
@@ -208,7 +227,8 @@ body {
 }
 
 .calc-page__right-paint {
-  display: block;
+  display: none;
+  border: none;
 }
 
 .calc-page__right-paint div.calc-page__painting {

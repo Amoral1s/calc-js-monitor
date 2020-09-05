@@ -37,6 +37,15 @@ body
 		font-weight: 700
 		transition: 0.3s
 		cursor: pointer
+		appearance: none
+		-webkit-appearance: none
+		border: none
+		&:focus
+			outline: none
+		&:disabled
+			background-color: #b1b1b1
+			&:hover
+				background-color: #b1b1b1
 		&:hover
 			background-color: #000
 			transition: 0.3s
@@ -78,6 +87,8 @@ body
 				padding: 20px
 				cursor: pointer
 				transition: 0.3s
+				input
+					cursor: pointer
 				&:checked
 					background-color: #000
 			
@@ -149,7 +160,8 @@ body
 				height: 220px
 				width: 420px
 		&__right-paint
-			display: block
+			display: none
+			border: none
 			div.calc-page__painting
 				display: block
 				b
