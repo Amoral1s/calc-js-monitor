@@ -45,16 +45,16 @@ if (startItem.length == 4) {
         nextValid.disabled = false;
     }
     elem.addEventListener('click', (event) => {
+      //валидация значение Минимум у инпутов
       const startItem = document.querySelectorAll('input[type="number"]');
-
-    startItem.forEach((elem) => {
-      elem.addEventListener('input', () => {
-        if (elem.value < elem.getAttribute('min')) {
-          elem.value = elem.getAttribute('min');
-        }
+      startItem.forEach((elem) => {
+        elem.addEventListener('input', () => {
+          if (elem.value < elem.getAttribute('min')) {
+            elem.value = elem.getAttribute('min');
+          }
+        });
       });
-    });
-    
+      //
       let target = event.target;
       const nextValid = elem.querySelector('.calc-next'); //Кнопка некст
       //валадиция 1 экрана 1 калькулятора (диагональ)
