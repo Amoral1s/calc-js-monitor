@@ -1,6 +1,7 @@
 'use strict'
 
 const startItem = document.querySelectorAll('.calc__item'); //Блоки с экранами (для старта квиза) (4)
+ //Блоки с экранами (для старта квиза) (4)
 
 if (startItem.length == 4) {
 
@@ -36,11 +37,24 @@ if (startItem.length == 4) {
   //Навигация по кнопкам через индексы
   let pageSet = 0;
   calcPage.forEach((elem, i) => {
+    
+
+
     const nextValid = elem.querySelector('.calc-next'); //Кнопка некст
       if (elem.classList.contains('novalid')) {
         nextValid.disabled = false;
     }
     elem.addEventListener('click', (event) => {
+      const startItem = document.querySelectorAll('input[type="number"]');
+
+    startItem.forEach((elem) => {
+      elem.addEventListener('input', () => {
+        if (elem.value < elem.getAttribute('min')) {
+          elem.value = elem.getAttribute('min');
+        }
+      });
+    });
+    
       let target = event.target;
       const nextValid = elem.querySelector('.calc-next'); //Кнопка некст
       //валадиция 1 экрана 1 калькулятора (диагональ)
