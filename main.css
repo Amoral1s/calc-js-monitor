@@ -1,4 +1,3 @@
-@charset "UTF-8";
 body {
   background-color: gray;
   display: flex;
@@ -90,10 +89,9 @@ body {
 }
 
 .calc-page__radio {
-  margin-bottom: 10px;
-  width: 7%;
+  margin-right: 30px;
   margin-bottom: 30px;
-  margin-top: 20px;
+  width: 17%;
 }
 
 .calc-page__radio input {
@@ -142,12 +140,6 @@ body {
 .calc-page__radio label b {
   margin: 0 10px;
   font-size: 16px;
-  padding: 10px 0;
-}
-
-.calc-page__radio input.check + label {
-  background-color: #000;
-  color: #ffffff;
 }
 
 .calc-page__item {
@@ -172,15 +164,6 @@ body {
 
 .calc-page__left {
   width: 48%;
-}
-
-.calc-page__left textarea {
-  resize: none;
-  width: 100%;
-  height: 90px;
-  padding: 15px;
-  max-width: 93%;
-  min-width: 0;
 }
 
 .calc-page__right {
@@ -222,69 +205,6 @@ body {
   width: 50%;
   font-size: 24px;
   padding-left: 20px;
-}
-
-.calc-page__diagrows {
-  position: relative;
-  overflow: hidden;
-}
-
-.calc-page__diagrows::before {
-  position: absolute;
-  top: 20px;
-  left: 0;
-  height: 50px;
-  width: 50%;
-  content: 'Рекомендованные значения диагонали:';
-  background-color: #fff;
-  font-size: 25px;
-  font-weight: 700;
-  color: red;
-}
-
-.calc-page__diagrows::after {
-  position: absolute;
-  content: '';
-  height: 100%;
-  width: 100%;
-  top: 50px;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  opacity: 0.5;
-  background-color: #fff;
-}
-
-.calc-page__diagrows__active::after {
-  display: none;
-}
-
-.calc-page__diagrows__active::before {
-  display: none;
-}
-
-.calc-page__diag-row {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.calc-page__diag-row label {
-  width: 47%;
-  margin-bottom: 3%;
-}
-
-.calc-page__diag-row label select {
-  font-size: 24px;
-  padding: 20px;
-  width: 55%;
-  cursor: pointer;
-}
-
-.calc-page__diag-row label select option {
-  cursor: pointer;
 }
 
 .calc-page__border {
@@ -334,7 +254,7 @@ body {
 
 .calc-page__dop {
   display: block;
-  width: 100%;
+  width: 48%;
   cursor: pointer;
 }
 
