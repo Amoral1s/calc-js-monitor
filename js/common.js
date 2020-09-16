@@ -27,7 +27,8 @@ calcStepItem.forEach((elem,i) => {
     });
     myFadeIn(calcPageStepsStart[0]);
     let pageCount = 0,
-        plateSelect = false;
+        plateSelect = false,
+        plateSelectNext = false;
     let buttonPrev = calcPage[i].querySelector('.calc-page__prev'),
           buttonNext = calcPage[i].querySelector('.calc-page__next'),
           calcDiagItem = calcPage[i].querySelectorAll('.calc-diag__item'),
@@ -37,28 +38,39 @@ calcStepItem.forEach((elem,i) => {
           textHeight = calcPage[i].querySelector('.first-screen-height'),
           textWidth = calcPage[i].querySelector('.first-screen-width'),
           textDeep = calcPage[i].querySelector('.first-screen-deep'),
-          plateTypeButtons = calcPage[i].querySelectorAll('.calc-inner__plate');
+          plateTypeButtons = calcPage[i].querySelectorAll('.calc-inner__plate'),
+          plateImages = calcPage[i].querySelectorAll('.calc-inner__plateimg');
 
-    plateTypeButtons.forEach((elem) => {
+    plateTypeButtons.forEach((elem, i) => {
       elem.addEventListener('click', () => {
         plateTypeButtons.forEach((elem) => {
           elem.classList.remove('calc-inner__plate-active');
         });
         elem.classList.add('calc-inner__plate-active');
-
-        calcPageStepsStart.forEach((elem) => { 
-          elem.style.display = 'none'
-        });
-     
-        
-        myFadeIn(calcPageStepsStart[0]);
-        plateSelect = true;
+        if (elem.classList.contains('calc-inner__plate-active')) {
+          plateImages.forEach((img) => {
+            img.style.display = 'none';
+          });
+          
+          myFadeInFlex(plateImages[i]);
+        }
         typeAllDeep.value = elem.dataset.deep;
         textDeep.textContent = elem.dataset.deep;
         firstCalcSet.deep = elem.dataset.deep;
         buttonNext.disabled = false; 
+        plateSelect = true;
       });
     });
+
+    if(typeAllDeep) {
+      typeAllDeep.addEventListener('click', () => {
+        calcPageStepsStart.forEach((elem) => {
+          elem.style.display = 'none'
+        });
+        pageCount++;
+        myFadeIn(calcPageStepsStart[pageCount]);
+      });
+    }
 
     if (typeAllWidth) {
       typeAllWidth.addEventListener('input', () => {
@@ -95,25 +107,13 @@ calcStepItem.forEach((elem,i) => {
         typeAllWidth.value = elem.dataset.width;
         textHeight.textContent = elem.dataset.height;
         textWidth.textContent = elem.dataset.width;
-        buttonNext.disabled = false;  
-        if (elem.classList.contains('another')) {
-          typeAllWidth.disabled = false;
-          typeAllHeight.disabled = false;
-          buttonNext.disabled = true;  
-        } else {
-          typeAllWidth.disabled = true;
-          typeAllHeight.disabled = true;
-          buttonNext.disabled = false; 
-        }
+        typeAllDeep.disabled = false;
       });
     });
 
     buttonNext.disabled = true;      
     calcPage[i].addEventListener('click', (e) => {
       let target = e.target;
-      console.log(pageCount);
-      console.log(plateSelect);
-      
 
       if(target == buttonNext && buttonNext.disabled == false) { //NEXT BUTTON
         if (pageCount >= calcPageStepsStart.length - 2) {
@@ -122,17 +122,28 @@ calcStepItem.forEach((elem,i) => {
         calcPageStepsStart.forEach((elem) => {
           elem.style.display = 'none'
         });
-        if (plateSelect == true) {
-          pageCount++;
+        if (plateSelectNext == true) {
+          pageCount = 2;
           myFadeIn(calcPageStepsStart[pageCount]);
+          buttonNext.disabled = true; 
+          plateSelectNext = false;
+        } 
+        else if (plateSelect === true) {
+          pageCount = 0;
+          myFadeIn(calcPageStepsStart[pageCount]);
+          buttonNext.disabled = false; 
           plateSelect = false;
-          elem.removeEventListener('click', this);
+          plateSelectNext = true;
+          typeAllDeep.disabled = true;
         } else {
           pageCount++;
           myFadeIn(calcPageStepsStart[pageCount]);
-          plateSelect = false;
+          buttonNext.disabled = true; 
         }
-        buttonNext.disabled = true; 
+
+        
+        
+        
         
       }
       if(target == buttonPrev) {//PREV BUTTON
@@ -142,7 +153,6 @@ calcStepItem.forEach((elem,i) => {
         calcPageStepsStart.forEach((elem) => { 
           elem.style.display = 'none'
         });
-        plateSelect = false;
         if (pageCount == 0) {
           myFadeOut(calcPage[i]);
           console.log(pageCount + ' reset');
@@ -180,6 +190,18 @@ function myFadeOut(el) {
 		}
 		el.style.opacity = opacity;
 		opacity -= opacity * 0.1;
+	}, 10);
+}
+
+function myFadeInFlex(el) {
+	var opacity = 0.01;
+	el.style.display = "flex";
+	var timer = setInterval(function() {
+		if(opacity >= 1) {
+			clearInterval(timer);
+		}
+		el.style.opacity = opacity;
+		opacity += opacity * 0.1;
 	}, 10);
 }
 

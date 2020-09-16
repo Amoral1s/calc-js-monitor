@@ -50,6 +50,10 @@ body {
   opacity: 0.8;
 }
 
+.calc-allw__item input.type-all-deep-active {
+  background-color: #c7707f;
+}
+
 .calc-diag {
   display: flex;
   flex-wrap: wrap;
