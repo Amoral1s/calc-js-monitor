@@ -69,6 +69,7 @@ calcStepItem.forEach((elem,i) => {
         });
         pageCount++;
         myFadeIn(calcPageStepsStart[pageCount]);
+        buttonNext.textContent = 'Выбрать';
       });
     }
 
@@ -135,6 +136,7 @@ calcStepItem.forEach((elem,i) => {
           plateSelect = false;
           plateSelectNext = true;
           typeAllDeep.disabled = true;
+          buttonNext.textContent = 'Далее';
         } else {
           pageCount++;
           myFadeIn(calcPageStepsStart[pageCount]);

@@ -178,6 +178,11 @@ body {
   z-index: 100;
 }
 
+.calc-inner__itext textarea::placeholder {
+  text-align: center;
+  padding-top: 15px;
+}
+
 .calc-inner__itext textarea:focus {
   outline: none;
 }
