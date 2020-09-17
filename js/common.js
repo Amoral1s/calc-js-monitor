@@ -46,8 +46,27 @@ calcStepItem.forEach((elem,i) => {
           calcAlert = calcPage[i].querySelector('.calc-page__alert'),
           calcOverlay = calcPage[i].querySelector('.calc-page__overlay'),
           calcAlertButtonPrev = calcPage[i].querySelector('.button-alert__prev'),
-          calcAlertButtonNext = calcPage[i].querySelector('.button-alert__next');
+          calcAlertButtonNext = calcPage[i].querySelector('.button-alert__next'),
+          joyArrows = calcPage[i].querySelectorAll('.joy-item'),
+          joyCircle = calcPage[i].querySelector('.joy-circle');
           
+          let joyArrowsValueWidthLeft, 
+              joyArrowsValueWidthRight, 
+              joyArrowsValueHeightTop, 
+              joyArrowsValueHeightBottom;
+          const arrowFunc = () => {
+            joyArrowsValueWidthLeft = +(firstCalcSet.allWidth - firstCalcSet.screenWidth) / 2,
+            joyArrowsValueWidthRight = +(firstCalcSet.allWidth - firstCalcSet.screenWidth) / 2,
+            joyArrowsValueHeightTop = +(firstCalcSet.allHeight - firstCalcSet.screenHeight) / 2;
+            joyArrowsValueHeightBottom = +(firstCalcSet.allHeight - firstCalcSet.screenHeight) / 2;
+            joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
+            joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
+            joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
+            joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
+          } 
+      
+          
+         
 
     plateTypeButtons.forEach((elem, i) => {
       elem.addEventListener('click', () => {
@@ -79,6 +98,8 @@ calcStepItem.forEach((elem,i) => {
         myFadeIn(calcPageStepsStart[pageCount]);
         buttonNext.textContent = 'Выбрать';
         deepClick = true;
+
+        arrowFunc();
       });
     }
 
@@ -87,6 +108,7 @@ calcStepItem.forEach((elem,i) => {
         firstCalcSet.allWidth= typeAllWidth.value;
         textWidth.textContent = typeAllWidth.value;
         activeWidth.value = typeAllWidth.value - 70;
+        arrowFunc();
         if (typeAllDeep.value > 10 && typeAllHeight.value > 10) {
           buttonNext.disabled = false; 
         }
@@ -97,6 +119,7 @@ calcStepItem.forEach((elem,i) => {
         firstCalcSet.allHeight = typeAllHeight.value;
         textHeight.textContent = typeAllHeight.value;
         activeHeight.value = typeAllHeight.value - 70;
+        arrowFunc();
         if (typeAllDeep.value > 10 && typeAllHeight.value > 10) {
           buttonNext.disabled = false; 
         }
@@ -120,6 +143,12 @@ calcStepItem.forEach((elem,i) => {
         
         activeHeight.value = +elem.dataset.height - 70;
         activeWidth.value = +elem.dataset.width - 70;
+        firstCalcSet.screenHeight = activeHeight.value;
+        firstCalcSet.screenWidth = activeWidth.value;
+        arrowFunc();
+        
+        
+
         typeAllDeep.disabled = false;
       });
     });
@@ -132,6 +161,9 @@ calcStepItem.forEach((elem,i) => {
       }
       else {
         buttonNext.disabled = false;
+        firstCalcSet.screenWidth = activeWidth.value;
+        arrowFunc();
+
       }
     });
     activeHeight.addEventListener('input', () => {
@@ -141,6 +173,9 @@ calcStepItem.forEach((elem,i) => {
         myFadeIn(calcAlert);
       } else {
         buttonNext.disabled = false;
+        firstCalcSet.screenHeight = activeHeight.value;
+        arrowFunc();
+
       }
     });
     calcAlertButtonPrev.addEventListener('click', () => {
@@ -162,10 +197,68 @@ calcStepItem.forEach((elem,i) => {
         myFadeOut(calcAlert);
         activeHeight.value = typeAllHeight.value - 70;
         activeWidth.value = typeAllWidth.value - 70;
+        firstCalcSet.screenHeight = activeHeight.value;
+        firstCalcSet.screenWidth = activeWidth.value;
         buttonNext.disabled = false; 
     });
 
+    joyCircle.addEventListener('click', () => {
+      arrowFunc();
+    });
 
+    
+
+
+    joyArrows.forEach((elem, i) => {
+      elem.addEventListener('mouseup', () => {
+        
+      });
+      
+      elem.addEventListener('mousedown', () => {
+          if (i == 0) {
+            if (+joyArrows[0].children[0].textContent <= 35) {
+              alert('Значение не может быть меньше 35мм');
+              return 
+            }
+            joyArrowsValueWidthLeft = +joyArrowsValueWidthLeft - 1;
+            joyArrowsValueWidthRight = +joyArrowsValueWidthRight + 1;
+            joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
+            joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
+          } 
+          if (i == 2) {
+            if (+joyArrows[2].children[0].textContent <= 35) {
+              alert('Значение не может быть меньше 35мм');
+              return 
+            }
+            joyArrowsValueWidthLeft = +joyArrowsValueWidthLeft + 1;
+            joyArrowsValueWidthRight = +joyArrowsValueWidthRight - 1;
+            joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
+            joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
+          } 
+          if (i == 1) {
+            if (+joyArrows[1].children[0].textContent <= 35) {
+              alert('Значение не может быть меньше 35мм');
+              return 
+            }
+            joyArrowsValueHeightTop = +joyArrowsValueHeightTop - 1;
+            joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom + 1;
+            joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
+            joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
+          } 
+          if (i == 3) {
+            if (+joyArrows[3].children[0].textContent <= 35) {
+              alert('Значение не может быть меньше 35мм');
+              return 
+            }
+            joyArrowsValueHeightTop = +joyArrowsValueHeightTop + 1;
+            joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom - 1;
+            joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
+            joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
+          } 
+      });
+
+      
+    });
 
 
 

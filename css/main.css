@@ -152,6 +152,7 @@ body {
 .calc-inner__joy-wrap .joy-item p {
   transform: rotate(-180deg);
   padding-left: 25px;
+  user-select: none;
 }
 
 .calc-inner__joy-wrap .joy-item:hover {
@@ -213,6 +214,10 @@ body {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.24);
   cursor: pointer;
   transition: 0.3s;
+}
+
+.calc-inner__joy-wrap .joy-circle p {
+  user-select: none;
 }
 
 .calc-inner__joy-wrap .joy-circle:hover {
