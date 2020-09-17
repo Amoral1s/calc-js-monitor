@@ -48,7 +48,8 @@ calcStepItem.forEach((elem,i) => {
           calcAlertButtonPrev = calcPage[i].querySelector('.button-alert__prev'),
           calcAlertButtonNext = calcPage[i].querySelector('.button-alert__next'),
           joyArrows = calcPage[i].querySelectorAll('.joy-item'),
-          joyCircle = calcPage[i].querySelector('.joy-circle');
+          joyCircle = calcPage[i].querySelector('.joy-circle'),
+          joySquare = calcPage[i].querySelector('.joy-square__wrap');
           
           let joyArrowsValueWidthLeft, 
               joyArrowsValueWidthRight, 
@@ -202,12 +203,18 @@ calcStepItem.forEach((elem,i) => {
         buttonNext.disabled = false; 
     });
 
+    let sqLeft = 1,
+        sqTop = 1;
     joyCircle.addEventListener('click', () => {
       arrowFunc();
+      sqLeft = 1;
+      sqTop = 1;
+      joySquare.style.left =  0  + 'px';
+      joySquare.style.top = 0  + 'px';
     });
 
     
-
+    
 
     joyArrows.forEach((elem, i) => {
       elem.addEventListener('mouseup', () => {
@@ -224,6 +231,11 @@ calcStepItem.forEach((elem,i) => {
             joyArrowsValueWidthRight = +joyArrowsValueWidthRight + 1;
             joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
             joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
+            if (sqLeft > -28) {
+              sqLeft--;
+              joySquare.style.left =  sqLeft  + 'px';
+            }
+            
           } 
           if (i == 2) {
             if (+joyArrows[2].children[0].textContent <= 35) {
@@ -234,6 +246,10 @@ calcStepItem.forEach((elem,i) => {
             joyArrowsValueWidthRight = +joyArrowsValueWidthRight - 1;
             joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
             joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
+            if(sqLeft < 31) {
+              sqLeft++;
+            joySquare.style.left = sqLeft  + 'px';
+            }
           } 
           if (i == 1) {
             if (+joyArrows[1].children[0].textContent <= 35) {
@@ -244,6 +260,10 @@ calcStepItem.forEach((elem,i) => {
             joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom + 1;
             joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
             joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
+            if (sqTop > -32) {
+              sqTop--;
+              joySquare.style.top = sqTop  + 'px';
+            }
           } 
           if (i == 3) {
             if (+joyArrows[3].children[0].textContent <= 35) {
@@ -254,6 +274,11 @@ calcStepItem.forEach((elem,i) => {
             joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom - 1;
             joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
             joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
+            if (sqTop < 29) {
+              sqTop++;
+              joySquare.style.top = sqTop  + 'px';
+            }
+
           } 
       });
 
