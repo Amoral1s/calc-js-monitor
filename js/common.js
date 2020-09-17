@@ -28,7 +28,8 @@ calcStepItem.forEach((elem,i) => {
     myFadeIn(calcPageStepsStart[0]);
     let pageCount = 0,
         plateSelect = false,
-        plateSelectNext = false;
+        plateSelectNext = false,
+        deepClick = false;
     let buttonPrev = calcPage[i].querySelector('.calc-page__prev'),
           buttonNext = calcPage[i].querySelector('.calc-page__next'),
           calcDiagItem = calcPage[i].querySelectorAll('.calc-diag__item'),
@@ -77,6 +78,7 @@ calcStepItem.forEach((elem,i) => {
         pageCount++;
         myFadeIn(calcPageStepsStart[pageCount]);
         buttonNext.textContent = 'Выбрать';
+        deepClick = true;
       });
     }
 
@@ -216,11 +218,16 @@ calcStepItem.forEach((elem,i) => {
           myFadeOut(calcPage[i]);
           console.log(pageCount + ' reset');
           
+        } else if (deepClick === true) {
+          buttonNext.textContent = 'Дальше';
+          buttonNext.disabled = true; 
+          pageCount--;
+          myFadeIn(calcPageStepsStart[pageCount]);
+          deepClick = false;
         } else {
           pageCount--;
           myFadeIn(calcPageStepsStart[pageCount]);
         }
-        
       }
     });
     
