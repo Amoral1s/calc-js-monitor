@@ -274,6 +274,86 @@ body {
   left: 0;
 }
 
+.calc-page__buttons-alert {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.calc-page__buttons-alert div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 210px;
+  height: 55px;
+  text-align: center;
+  background-color: #742a92;
+  color: #ffffff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.calc-page__buttons-alert div:hover {
+  transition: 0.3s;
+  background-color: #000000;
+}
+
+.calc-page__buttons-alert div:first-child {
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  border: 1px solid #f1f3f5;
+  color: #000000;
+}
+
+.calc-page__buttons-alert div:first-child:hover {
+  background-color: #000000;
+  color: #ffffff;
+  transition: 0.3s;
+}
+
+.calc-page__overlay {
+  position: absolute;
+  bottom: 110px;
+  right: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: calc(100% + 80px);
+  z-index: 999;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+}
+
+.calc-page__alert {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 30px;
+  z-index: 1001;
+  display: none;
+}
+
+.calc-page__alert p {
+  font-size: 20px;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.calc-page__alert b {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.calc-page__alert b, .calc-page__alert p {
+  width: 100%;
+  text-align: center;
+  display: block;
+}
+
 .calc-page__step {
   position: absolute;
   top: 0;

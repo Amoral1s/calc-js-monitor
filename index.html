@@ -156,7 +156,54 @@
         </div>
       </div>
       <div class="calc-page__step">
-3
+        <div class="calc-page__overlay"></div>
+        <div class="calc-page__alert calc-page-alert-active-one">
+          <p>Недопустимое значение!</p>
+          <b>Размер активной области не может превышать размера корпуса включая обязательную рамку по периметру, размер которой не менее 35 мм</b>
+          <div class="calc-page__buttons-alert">
+            <div class="calc-page__buttons-alert__button button-alert__prev">
+              Выбрать другой размер корпуса (возврат к шагу 1)
+            </div>
+            <div class="calc-page__buttons-alert__button button-alert__next">
+              Изменить значения активной области
+            </div>
+          </div>
+        </div>
+        <div class="calc-inner__title">
+          <div class="num"><b>2</b> <h2>Размер активной области</h2></div>
+          <p>Рекомендуем указывать размер согласно размеру видимой или активной области  LCD или сенсорного экрана,
+            который планируется использовать.</p>
+        </div>
+        <div class="calc-inner">
+          <div class="calc-inner__left">
+            <div class="calc-allw">
+              <div class="calc-allw__item">
+                <p>Высота, мм</p>
+                <input type="number" value="0" min="10" class="active-height" >
+              </div>
+              <div class="calc-allw__item">
+                <p>Длина, мм</p>
+                <input type="number" value="0" min="10" class="active-width" >
+              </div>
+              
+            </div>
+          </div>
+          <div class="calc-inner__right calc-diag-arrows">
+            <img src="img/1-2-active-screen.png" alt="">
+            <b class="first-screen-height first-screen-num">
+              
+            </b>
+            <b class="first-screen-width first-screen-num">
+              
+            </b>
+            <b class="first-screen-deep first-screen-num">
+              
+            </b>
+          </div>
+          <div class="calc-inner__itext">
+            <textarea name="" id="" cols="30" rows="10" placeholder="Добавить примечание" class="first-calc-comment-three"></textarea>
+          </div>
+        </div>
       </div>
       <div class="calc-page__step">
 4

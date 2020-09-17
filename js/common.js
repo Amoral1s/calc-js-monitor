@@ -39,7 +39,14 @@ calcStepItem.forEach((elem,i) => {
           textWidth = calcPage[i].querySelector('.first-screen-width'),
           textDeep = calcPage[i].querySelector('.first-screen-deep'),
           plateTypeButtons = calcPage[i].querySelectorAll('.calc-inner__plate'),
-          plateImages = calcPage[i].querySelectorAll('.calc-inner__plateimg');
+          plateImages = calcPage[i].querySelectorAll('.calc-inner__plateimg'),
+          activeHeight = calcPage[i].querySelector('.active-height'),
+          activeWidth = calcPage[i].querySelector('.active-width'),
+          calcAlert = calcPage[i].querySelector('.calc-page__alert'),
+          calcOverlay = calcPage[i].querySelector('.calc-page__overlay'),
+          calcAlertButtonPrev = calcPage[i].querySelector('.button-alert__prev'),
+          calcAlertButtonNext = calcPage[i].querySelector('.button-alert__next');
+          
 
     plateTypeButtons.forEach((elem, i) => {
       elem.addEventListener('click', () => {
@@ -77,8 +84,8 @@ calcStepItem.forEach((elem,i) => {
       typeAllWidth.addEventListener('input', () => {
         firstCalcSet.allWidth= typeAllWidth.value;
         textWidth.textContent = typeAllWidth.value;
-  
-        if (typeAllWidth.value > 10 && typeAllHeight.value > 10) {
+        activeWidth.value = typeAllWidth.value - 70;
+        if (typeAllDeep.value > 10 && typeAllHeight.value > 10) {
           buttonNext.disabled = false; 
         }
       });
@@ -87,8 +94,8 @@ calcStepItem.forEach((elem,i) => {
       typeAllHeight.addEventListener('input', () => {
         firstCalcSet.allHeight = typeAllHeight.value;
         textHeight.textContent = typeAllHeight.value;
-          
-        if (typeAllWidth.value > 10 && typeAllHeight.value > 10) {
+        activeHeight.value = typeAllHeight.value - 70;
+        if (typeAllDeep.value > 10 && typeAllHeight.value > 10) {
           buttonNext.disabled = false; 
         }
       });
@@ -108,10 +115,60 @@ calcStepItem.forEach((elem,i) => {
         typeAllWidth.value = elem.dataset.width;
         textHeight.textContent = elem.dataset.height;
         textWidth.textContent = elem.dataset.width;
+        
+        activeHeight.value = +elem.dataset.height - 70;
+        activeWidth.value = +elem.dataset.width - 70;
         typeAllDeep.disabled = false;
       });
     });
 
+    activeWidth.addEventListener('input', () => {
+      if (activeWidth.value > typeAllWidth.value - 70) {
+        buttonNext.disabled = true; 
+        myFadeIn(calcOverlay);
+        myFadeIn(calcAlert);
+      }
+      else {
+        buttonNext.disabled = false;
+      }
+    });
+    activeHeight.addEventListener('input', () => {
+      if (activeHeight.value > typeAllHeight.value - 70) {
+        buttonNext.disabled = true;
+        myFadeIn(calcOverlay);
+        myFadeIn(calcAlert);
+      } else {
+        buttonNext.disabled = false;
+      }
+    });
+    calcAlertButtonPrev.addEventListener('click', () => {
+        calcPageStepsStart.forEach((elem) => { 
+          elem.style.display = 'none'
+        });
+        myFadeOut(calcOverlay);
+        myFadeOut(calcAlert);
+        pageCount = 0;
+        myFadeIn(calcPageStepsStart[pageCount]);
+        buttonNext.disabled = true; 
+        plateSelect = false;
+        plateSelectNext = false;
+        typeAllDeep.disabled = false;
+        typeAllDeep.value = 0;
+    });
+    calcAlertButtonNext.addEventListener('click', () => {
+        myFadeOut(calcOverlay);
+        myFadeOut(calcAlert);
+        activeHeight.value = typeAllHeight.value - 70;
+        activeWidth.value = typeAllWidth.value - 70;
+        buttonNext.disabled = false; 
+    });
+
+
+
+
+
+
+//BUTTONS
     buttonNext.disabled = true;      
     calcPage[i].addEventListener('click', (e) => {
       let target = e.target;
@@ -126,7 +183,7 @@ calcStepItem.forEach((elem,i) => {
         if (plateSelectNext == true) {
           pageCount = 2;
           myFadeIn(calcPageStepsStart[pageCount]);
-          buttonNext.disabled = true; 
+          buttonNext.disabled = false; 
           plateSelectNext = false;
         } 
         else if (plateSelect === true) {
