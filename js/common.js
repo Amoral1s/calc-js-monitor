@@ -154,32 +154,36 @@ calcStepItem.forEach((elem,i) => {
       });
     });
 
-    activeWidth.addEventListener('input', () => {
-      if (activeWidth.value > typeAllWidth.value - 70) {
-        buttonNext.disabled = true; 
-        myFadeIn(calcOverlay);
-        myFadeIn(calcAlert);
-      }
-      else {
-        buttonNext.disabled = false;
-        firstCalcSet.screenWidth = activeWidth.value;
-        arrowFunc();
-
-      }
-    });
-    activeHeight.addEventListener('input', () => {
-      if (activeHeight.value > typeAllHeight.value - 70) {
-        buttonNext.disabled = true;
-        myFadeIn(calcOverlay);
-        myFadeIn(calcAlert);
-      } else {
-        buttonNext.disabled = false;
-        firstCalcSet.screenHeight = activeHeight.value;
-        arrowFunc();
-
-      }
-    });
-    calcAlertButtonPrev.addEventListener('click', () => {
+    if (activeWidth) {
+      activeWidth.addEventListener('input', () => {
+        if (activeWidth.value > typeAllWidth.value - 70) {
+          buttonNext.disabled = true; 
+          myFadeIn(calcOverlay);
+          myFadeIn(calcAlert);
+        }
+        else {
+          buttonNext.disabled = false;
+          firstCalcSet.screenWidth = activeWidth.value;
+          arrowFunc();
+        }
+      });
+    }
+    if (activeHeight) {
+      activeHeight.addEventListener('input', () => {
+        if (activeHeight.value > typeAllHeight.value - 70) {
+          buttonNext.disabled = true;
+          myFadeIn(calcOverlay);
+          myFadeIn(calcAlert);
+        } else {
+          buttonNext.disabled = false;
+          firstCalcSet.screenHeight = activeHeight.value;
+          arrowFunc();
+  
+        }
+      });
+    }
+    if (calcAlertButtonPrev) {
+      calcAlertButtonPrev.addEventListener('click', () => {
         calcPageStepsStart.forEach((elem) => { 
           elem.style.display = 'none'
         });
@@ -193,7 +197,9 @@ calcStepItem.forEach((elem,i) => {
         typeAllDeep.disabled = false;
         typeAllDeep.value = 0;
     });
-    calcAlertButtonNext.addEventListener('click', () => {
+    }
+    if (calcAlertButtonNext) {
+      calcAlertButtonNext.addEventListener('click', () => {
         myFadeOut(calcOverlay);
         myFadeOut(calcAlert);
         activeHeight.value = typeAllHeight.value - 70;
@@ -202,88 +208,124 @@ calcStepItem.forEach((elem,i) => {
         firstCalcSet.screenWidth = activeWidth.value;
         buttonNext.disabled = false; 
     });
+    }
+    
 
     let sqLeft = 1,
         sqTop = 1;
-    joyCircle.addEventListener('click', () => {
-      arrowFunc();
-      sqLeft = 1;
-      sqTop = 1;
-      joySquare.style.left =  0  + 'px';
-      joySquare.style.top = 0  + 'px';
-    });
+    
+    if (joyCircle) {
+      joyCircle.addEventListener('click', () => {
+        arrowFunc();
+        sqLeft = 1;
+        sqTop = 1;
+        joySquare.style.left =  0  + 'px';
+        joySquare.style.top = 0  + 'px';
+      });
+    }
+    
+
+    let intervalLeft,
+        intervalRight,
+        intervalTop,
+        intervalBottom;
 
     
     
-
-    joyArrows.forEach((elem, i) => {
-      elem.addEventListener('mouseup', () => {
+    if (joyArrows) {
+      joyArrows.forEach((elem, i) => {
+        elem.addEventListener('mouseup', () => {
+          clearInterval(intervalLeft);
+          clearInterval(intervalRight);
+          clearInterval(intervalTop);
+          clearInterval(intervalBottom);
+        });
+        
+        elem.addEventListener('mousedown', () => {
+            if (i == 0) {
+              if (+joyArrows[0].children[0].textContent <= 35) {
+                alert('Значение не может быть меньше 35мм');
+                return 
+              }
+              intervalLeft = setInterval(() => {
+                if (+joyArrows[0].children[0].textContent <= 35) {
+                  return 
+                }
+                joyArrowsValueWidthLeft = +joyArrowsValueWidthLeft - 1;
+                joyArrowsValueWidthRight = +joyArrowsValueWidthRight + 1;
+                joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
+                joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
+                if (sqLeft > -28) {
+                  sqLeft--;
+                  joySquare.style.left =  sqLeft  + 'px';
+                }
+                
+              }, 100);
+              
+            } 
+            if (i == 2) {
+              if (+joyArrows[2].children[0].textContent <= 35) {
+                alert('Значение не может быть меньше 35мм');
+                return 
+              }
+              intervalRight = setInterval(() => {
+                if (+joyArrows[2].children[0].textContent <= 35) {
+                  return 
+                }
+                joyArrowsValueWidthLeft = +joyArrowsValueWidthLeft + 1;
+                joyArrowsValueWidthRight = +joyArrowsValueWidthRight - 1;
+                joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
+                joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
+                if(sqLeft < 31) {
+                  sqLeft++;
+                joySquare.style.left = sqLeft  + 'px';
+                }
+              }, 100);
+            } 
+            if (i == 1) {
+              if (+joyArrows[1].children[0].textContent <= 35) {
+                alert('Значение не может быть меньше 35мм');
+                return 
+              }
+              intervalTop = setInterval(() => {
+                if (+joyArrows[1].children[0].textContent <= 35) {
+                  return 
+                }
+                joyArrowsValueHeightTop = +joyArrowsValueHeightTop - 1;
+                joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom + 1;
+                joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
+                joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
+                if (sqTop > -32) {
+                  sqTop--;
+                  joySquare.style.top = sqTop  + 'px';
+                }
+              }, 100);
+            } 
+            if (i == 3) {
+              if (+joyArrows[3].children[0].textContent <= 35) {
+                alert('Значение не может быть меньше 35мм');
+                return 
+              }
+              intervalBottom = setInterval(() => {
+                if (+joyArrows[3].children[0].textContent <= 35) {
+                  return 
+                }
+                joyArrowsValueHeightTop = +joyArrowsValueHeightTop + 1;
+                joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom - 1;
+                joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
+                joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
+                if (sqTop < 29) {
+                  sqTop++;
+                  joySquare.style.top = sqTop  + 'px';
+                }
+              }, 100);
+            } 
+        });
+  
         
       });
-      
-      elem.addEventListener('mousedown', () => {
-          if (i == 0) {
-            if (+joyArrows[0].children[0].textContent <= 35) {
-              alert('Значение не может быть меньше 35мм');
-              return 
-            }
-            joyArrowsValueWidthLeft = +joyArrowsValueWidthLeft - 1;
-            joyArrowsValueWidthRight = +joyArrowsValueWidthRight + 1;
-            joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
-            joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
-            if (sqLeft > -28) {
-              sqLeft--;
-              joySquare.style.left =  sqLeft  + 'px';
-            }
-            
-          } 
-          if (i == 2) {
-            if (+joyArrows[2].children[0].textContent <= 35) {
-              alert('Значение не может быть меньше 35мм');
-              return 
-            }
-            joyArrowsValueWidthLeft = +joyArrowsValueWidthLeft + 1;
-            joyArrowsValueWidthRight = +joyArrowsValueWidthRight - 1;
-            joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
-            joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
-            if(sqLeft < 31) {
-              sqLeft++;
-            joySquare.style.left = sqLeft  + 'px';
-            }
-          } 
-          if (i == 1) {
-            if (+joyArrows[1].children[0].textContent <= 35) {
-              alert('Значение не может быть меньше 35мм');
-              return 
-            }
-            joyArrowsValueHeightTop = +joyArrowsValueHeightTop - 1;
-            joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom + 1;
-            joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
-            joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
-            if (sqTop > -32) {
-              sqTop--;
-              joySquare.style.top = sqTop  + 'px';
-            }
-          } 
-          if (i == 3) {
-            if (+joyArrows[3].children[0].textContent <= 35) {
-              alert('Значение не может быть меньше 35мм');
-              return 
-            }
-            joyArrowsValueHeightTop = +joyArrowsValueHeightTop + 1;
-            joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom - 1;
-            joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
-            joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
-            if (sqTop < 29) {
-              sqTop++;
-              joySquare.style.top = sqTop  + 'px';
-            }
-
-          } 
-      });
-
-      
-    });
+    }
+    
 
 
 
