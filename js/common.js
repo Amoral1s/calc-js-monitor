@@ -115,24 +115,41 @@ calcStepItem.forEach((elem,i) => {
 
     if (typeAllWidth) {
       typeAllWidth.addEventListener('input', () => {
-        firstCalcSet.allWidth= typeAllWidth.value;
-        textWidth.textContent = typeAllWidth.value;
-        activeWidth.value = typeAllWidth.value - 70;
-        arrowFunc();
-        if (typeAllDeep.value > 10 && typeAllHeight.value > 10) {
-          buttonNext.disabled = false; 
+        if (typeAllWidth.value < 180) {
+          typeAllDeep.disabled = true;
+          arrowFunc();
+
+        }
+        else {
+          typeAllDeep.disabled = false;
+          firstCalcSet.allWidth= typeAllWidth.value;
+          textWidth.textContent = typeAllWidth.value;
+          activeWidth.value = typeAllWidth.value - 70;
+          firstCalcSet.screenWidth = typeAllWidth.value - 70;
+          arrowFunc();
+          if (typeAllDeep.value > 10 && typeAllHeight.value > 10) {
+            buttonNext.disabled = false; 
+          }
         }
       });
     }
 
     if(typeAllHeight) {
       typeAllHeight.addEventListener('input', () => {
+        if (typeAllHeight.value < 180) {
+          typeAllDeep.disabled = true;
+          arrowFunc();
+        }
+        else {
+        typeAllDeep.disabled = false;
         firstCalcSet.allHeight = typeAllHeight.value;
         textHeight.textContent = typeAllHeight.value;
         activeHeight.value = typeAllHeight.value - 70;
+        firstCalcSet.screenHeight = typeAllHeight.value - 70;
         arrowFunc();
         if (typeAllDeep.value > 10 && typeAllHeight.value > 10) {
           buttonNext.disabled = false; 
+        }
         }
       });
     }
@@ -143,6 +160,7 @@ calcStepItem.forEach((elem,i) => {
           calcDiagItem.forEach((elem) => {
             elem.classList.remove('calc-diag__item-active');
           });
+          
           elem.classList.add('calc-diag__item-active');
           firstCalcSet.allHeight = elem.dataset.height;
           firstCalcSet.allWidth = elem.dataset.width;
@@ -154,17 +172,27 @@ calcStepItem.forEach((elem,i) => {
           
           activeHeight.value = +elem.dataset.height - 70;
           activeWidth.value = +elem.dataset.width - 70;
-          firstCalcSet.screenHeight = activeHeight.value;
-          firstCalcSet.screenWidth = activeWidth.value;
+          firstCalcSet.screenHeight = typeAllHeight.value - 70;
+          firstCalcSet.screenWidth = typeAllWidth.value - 70;
           arrowFunc();
+          typeAllHeight.disabled = false;
+          typeAllWidth.disabled = false;
           joySelect = true;
           typeAllDeep.disabled = false;
+          if (elem.classList.contains('another')) {
+            typeAllDeep.disabled = true;
+          }
         });
       });
     }
 
     if (activeWidth) {
       activeWidth.addEventListener('input', () => {
+        if (activeWidth.value < 10 || activeHeight.value < 10) {
+          buttonNext.disabled = true; 
+          arrowFunc();
+          return
+        }
         if (activeWidth.value > typeAllWidth.value - 70) {
           buttonNext.disabled = true; 
           myFadeIn(calcOverlay);
@@ -182,6 +210,11 @@ calcStepItem.forEach((elem,i) => {
 
     if (activeHeight) {
       activeHeight.addEventListener('input', () => {
+        if (activeHeight.value < 10 || activeWidth.value < 10) {
+          buttonNext.disabled = true; 
+          arrowFunc();
+          return
+        }
         if (activeHeight.value > typeAllHeight.value - 70) {
           buttonNext.disabled = true;
           myFadeIn(calcOverlay);
@@ -405,12 +438,16 @@ calcStepItem.forEach((elem,i) => {
       });
     }
 
-
+   
 
 //BUTTONS
     buttonNext.disabled = true;      
     calcPage[i].addEventListener('click', (e) => {
+      console.log(plateSelect);
+      console.log(plateSelectNext);
+      console.log(deepClick);
       console.log(pageCount)
+      console.log(firstCalcSet)
       let target = e.target;
 
       if(target == buttonNext && buttonNext.disabled == false) { //NEXT BUTTON
@@ -422,7 +459,7 @@ calcStepItem.forEach((elem,i) => {
         });
         if (plateSelectNext == true) {
           pageCount = 2;
-          myFadeIn(calcPageStepsStart[pageCount]);
+          myFadeIn(calcPageStepsStart[2]);
           buttonNext.disabled = false; 
           plateSelectNext = false;
         } 
@@ -432,21 +469,15 @@ calcStepItem.forEach((elem,i) => {
           buttonNext.disabled = false; 
           plateSelect = false;
           plateSelectNext = true;
-          typeAllDeep.disabled = true;
           buttonNext.textContent = 'Далее';
         } else if (joySelect = true || pageCount == 2) {
           pageCount++;
           buttonNext.disabled = false; 
           myFadeIn(calcPageStepsStart[pageCount]);
           joySelect = false;
-        } 
-        else {
-          pageCount++;
-          myFadeIn(calcPageStepsStart[pageCount]);
-          buttonNext.disabled = true; 
-        }
+        } else if (pageCount == 2) {
+          console.log('page 2')
 
-        if (pageCount == 2) {
           calcPageStepsStart.forEach((elem) => {
             elem.style.display = 'none'
           });
@@ -454,35 +485,86 @@ calcStepItem.forEach((elem,i) => {
           buttonNext.disabled = false; 
           myFadeIn(calcPageStepsStart[pageCount]);
         } 
+        else {
+          pageCount++;
+          myFadeIn(calcPageStepsStart[pageCount]);
+          buttonNext.disabled = true; 
+        }
+
         
+        
+       if (pageCount === 4) {
+          console.log('page 3')
+         buttonNext.disabled = true; 
+         calcPageStepsStart.forEach((elem) => {
+           elem.style.display = 'none'
+         });
+         myFadeIn(calcPageStepsStart[pageCount]);
+         buttonNext.disabled = true; 
+       } else if (pageCount === 3) {
+        buttonNext.disabled = true; 
+        calcPageStepsStart.forEach((elem) => {
+          elem.style.display = 'none'
+        });
+        myFadeIn(calcPageStepsStart[pageCount]);
+        buttonNext.disabled = false; 
+       }
         
         
         
       }
       if(target == buttonPrev) {//PREV BUTTON
-        if (pageCount >= calcPageStepsStart.length - 3) {
-          buttonNext.style.display = 'block';
-        }
         calcPageStepsStart.forEach((elem) => { 
           elem.style.display = 'none'
         });
-        if (pageCount == 0) {
+        if (pageCount == 2) {
+          console.log('123')
+          buttonNext.textContent = 'Далee';
+          buttonNext.disabled = true; 
+          pageCount = 0;
+          myFadeIn(calcPageStepsStart[pageCount]);
+          deepClick = false;
+          plateSelect = false;
+          return
+        }
+
+        if (pageCount == calcPageStepsStart.length - 1) {
+          console.log('-3')
+          buttonNext.style.display = 'block';
+          pageCount--;
+          myFadeIn(calcPageStepsStart[pageCount]);
+
+        } else if (pageCount == 0) {
           myFadeOut(calcPage[i]);
           console.log(pageCount + ' reset');
           buttonNext.disabled = true; 
           
         } else if (deepClick === true) {
-          buttonNext.textContent = 'Дальше';
+          buttonNext.textContent = 'Далee';
           buttonNext.disabled = true; 
           pageCount--;
           myFadeIn(calcPageStepsStart[pageCount]);
           deepClick = false;
-        } else {
+        } 
+         else if (plateSelect === true && plateSelectNext === false) {
+          buttonNext.textContent = 'Далee';
+          buttonNext.disabled = true; 
+          pageCount = 0;
+          myFadeIn(calcPageStepsStart[pageCount]);
+          deepClick = false;
+          plateSelect = false;
+        } 
+        else {
+          buttonNext.style.display = 'block';
           pageCount--;
           myFadeIn(calcPageStepsStart[pageCount]);
+          buttonNext.disabled = false; 
         }
-        buttonNext.disabled = false; 
 
+        if (pageCount === 3) {
+         buttonNext.disabled = false; 
+       }
+        
       }
     });
     
