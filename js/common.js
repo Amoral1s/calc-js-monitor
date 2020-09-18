@@ -233,6 +233,7 @@ calcStepItem.forEach((elem,i) => {
     
     
     if (joyArrows) {
+      const joyWarning = document.querySelector('.joy-warning');
       joyArrows.forEach((elem, i) => {
         elem.addEventListener('mouseup', () => {
           clearInterval(intervalLeft);
@@ -244,81 +245,97 @@ calcStepItem.forEach((elem,i) => {
         elem.addEventListener('mousedown', () => {
             if (i == 0) {
               if (+joyArrows[0].children[0].textContent <= 35) {
-                alert('Значение не может быть меньше 35мм');
+                  joyWarning.style.opacity = '1';
                 return 
+              } else {
+                joyWarning.style.opacity = '0';
+                intervalLeft = setInterval(() => {
+                  if (+joyArrows[0].children[0].textContent <= 35) {
+                    joyWarning.style.opacity = '1';
+                    return 
+                  }
+                  joyArrowsValueWidthLeft = +joyArrowsValueWidthLeft - 1;
+                  joyArrowsValueWidthRight = +joyArrowsValueWidthRight + 1;
+                  joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
+                  joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
+                  if (sqLeft > -28) {
+                    sqLeft--;
+                    joySquare.style.left =  sqLeft  + 'px';
+                  }
+                  
+                }, 100);
               }
-              intervalLeft = setInterval(() => {
-                if (+joyArrows[0].children[0].textContent <= 35) {
-                  return 
-                }
-                joyArrowsValueWidthLeft = +joyArrowsValueWidthLeft - 1;
-                joyArrowsValueWidthRight = +joyArrowsValueWidthRight + 1;
-                joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
-                joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
-                if (sqLeft > -28) {
-                  sqLeft--;
-                  joySquare.style.left =  sqLeft  + 'px';
-                }
-                
-              }, 100);
+              
               
             } 
             if (i == 2) {
               if (+joyArrows[2].children[0].textContent <= 35) {
-                alert('Значение не может быть меньше 35мм');
+                  joyWarning.style.opacity = '1';
                 return 
+              } else {
+                joyWarning.style.opacity = '0';
+                intervalRight = setInterval(() => {
+                  if (+joyArrows[2].children[0].textContent <= 35) {
+                    joyWarning.style.opacity = '1';
+                    return 
+                  }
+                  joyArrowsValueWidthLeft = +joyArrowsValueWidthLeft + 1;
+                  joyArrowsValueWidthRight = +joyArrowsValueWidthRight - 1;
+                  joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
+                  joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
+                  if(sqLeft < 31) {
+                    sqLeft++;
+                  joySquare.style.left = sqLeft  + 'px';
+                  }
+                }, 100);
               }
-              intervalRight = setInterval(() => {
-                if (+joyArrows[2].children[0].textContent <= 35) {
-                  return 
-                }
-                joyArrowsValueWidthLeft = +joyArrowsValueWidthLeft + 1;
-                joyArrowsValueWidthRight = +joyArrowsValueWidthRight - 1;
-                joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
-                joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
-                if(sqLeft < 31) {
-                  sqLeft++;
-                joySquare.style.left = sqLeft  + 'px';
-                }
-              }, 100);
+              
             } 
             if (i == 1) {
               if (+joyArrows[1].children[0].textContent <= 35) {
-                alert('Значение не может быть меньше 35мм');
+                  joyWarning.style.opacity = '1';
                 return 
+              } else {
+                joyWarning.style.opacity = '0';
+                intervalTop = setInterval(() => {
+                  if (+joyArrows[1].children[0].textContent <= 35) {
+                    joyWarning.style.opacity = '1';
+                    return 
+                  }
+                  joyArrowsValueHeightTop = +joyArrowsValueHeightTop - 1;
+                  joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom + 1;
+                  joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
+                  joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
+                  if (sqTop > -32) {
+                    sqTop--;
+                    joySquare.style.top = sqTop  + 'px';
+                  }
+                }, 100);
               }
-              intervalTop = setInterval(() => {
-                if (+joyArrows[1].children[0].textContent <= 35) {
-                  return 
-                }
-                joyArrowsValueHeightTop = +joyArrowsValueHeightTop - 1;
-                joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom + 1;
-                joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
-                joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
-                if (sqTop > -32) {
-                  sqTop--;
-                  joySquare.style.top = sqTop  + 'px';
-                }
-              }, 100);
+              
             } 
             if (i == 3) {
               if (+joyArrows[3].children[0].textContent <= 35) {
-                alert('Значение не может быть меньше 35мм');
+                  joyWarning.style.opacity = '1';
                 return 
+              } else {
+                joyWarning.style.opacity = '0';
+                intervalBottom = setInterval(() => {
+                  if (+joyArrows[3].children[0].textContent <= 35) {
+                    joyWarning.style.opacity = '1';
+                    return 
+                  }
+                  joyArrowsValueHeightTop = +joyArrowsValueHeightTop + 1;
+                  joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom - 1;
+                  joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
+                  joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
+                  if (sqTop < 29) {
+                    sqTop++;
+                    joySquare.style.top = sqTop  + 'px';
+                  }
+                }, 100);
               }
-              intervalBottom = setInterval(() => {
-                if (+joyArrows[3].children[0].textContent <= 35) {
-                  return 
-                }
-                joyArrowsValueHeightTop = +joyArrowsValueHeightTop + 1;
-                joyArrowsValueHeightBottom= +joyArrowsValueHeightBottom - 1;
-                joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
-                joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
-                if (sqTop < 29) {
-                  sqTop++;
-                  joySquare.style.top = sqTop  + 'px';
-                }
-              }, 100);
+              
             } 
         });
   

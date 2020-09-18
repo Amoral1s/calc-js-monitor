@@ -101,6 +101,14 @@ body {
   flex-wrap: wrap;
 }
 
+.calc-inner .joy-warning {
+  color: red;
+  font-weight: 700;
+  font-size: 18px;
+  transition: 0s;
+  opacity: 0;
+}
+
 .calc-inner__joy-square {
   border: 2px solid #000000;
   width: 400px;
