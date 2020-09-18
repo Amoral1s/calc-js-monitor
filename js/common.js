@@ -54,7 +54,8 @@ calcStepItem.forEach((elem,i) => {
           buttonRalNone = calcPage[i].querySelector('.button-ral-none'),
           ralTopInput = calcPage[i].querySelector('.ral-top'),
           ralBottomInput = calcPage[i].querySelector('.ral-bottom'),
-          paintImg = calcPage[i].querySelector('.paint-click');
+          paintImg = calcPage[i].querySelector('.paint-click'),
+          calcDopButtons = calcPage[i].querySelector('.calc-dop__button');
           
     let joyArrowsValueWidthLeft, 
         joyArrowsValueWidthRight, 

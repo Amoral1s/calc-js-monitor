@@ -17,6 +17,81 @@ body {
   padding-bottom: 100px;
 }
 
+.calc-dop__button {
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f1f3f5;
+  height: 50px;
+  width: 340px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.calc-dop__button:hover {
+  transition: 0.3s;
+  background-color: #742a92;
+  color: #ffffff;
+}
+
+.calc-dop__button-active {
+  background-color: #0000;
+  color: #ffffff;
+}
+
+.calc-dop__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 50px;
+  position: relative;
+  margin-top: 30px;
+}
+
+.calc-dop__item b {
+  position: absolute;
+  transition: 0.3s;
+  font-size: 16px;
+  opacity: 0;
+  padding: 15px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  background-color: #fff;
+  top: -70px;
+  right: -255px;
+  z-index: 50;
+}
+
+.calc-dop__item .trigger {
+  position: absolute;
+  cursor: pointer;
+  right: 25px;
+  top: 13px;
+  border: 1px solid #000000;
+  height: 30px;
+  width: 30px;
+  font-size: 30px;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calc-dop__item .trigger:hover + b {
+  opacity: 1;
+  transition: 0.3s;
+}
+
+.calc-dop__item p {
+  text-align: center;
+  max-width: 300px;
+  font-size: 14px;
+  line-height: 1.3;
+}
+
 .calc-allw {
   margin-top: 50px;
 }
