@@ -11,7 +11,8 @@ const firstCalcSet = {
   deep: 0,
   screenWidth: 0,
   screenHeight: 0,
-  plateType: ''
+  plateType: '',
+  paint: ''
 }
 
 ///первый шаг fadein out
@@ -49,46 +50,53 @@ calcStepItem.forEach((elem,i) => {
           calcAlertButtonNext = calcPage[i].querySelector('.button-alert__next'),
           joyArrows = calcPage[i].querySelectorAll('.joy-item'),
           joyCircle = calcPage[i].querySelector('.joy-circle'),
-          joySquare = calcPage[i].querySelector('.joy-square__wrap');
+          joySquare = calcPage[i].querySelector('.joy-square__wrap'),
+          buttonRalNone = calcPage[i].querySelector('.button-ral-none'),
+          ralTopInput = calcPage[i].querySelector('.ral-top'),
+          ralBottomInput = calcPage[i].querySelector('.ral-bottom'),
+          paintImg = calcPage[i].querySelector('.paint-click');
           
-          let joyArrowsValueWidthLeft, 
-              joyArrowsValueWidthRight, 
-              joyArrowsValueHeightTop, 
-              joyArrowsValueHeightBottom;
-          const arrowFunc = () => {
-            joyArrowsValueWidthLeft = +(firstCalcSet.allWidth - firstCalcSet.screenWidth) / 2,
-            joyArrowsValueWidthRight = +(firstCalcSet.allWidth - firstCalcSet.screenWidth) / 2,
-            joyArrowsValueHeightTop = +(firstCalcSet.allHeight - firstCalcSet.screenHeight) / 2;
-            joyArrowsValueHeightBottom = +(firstCalcSet.allHeight - firstCalcSet.screenHeight) / 2;
-            joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
-            joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
-            joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
-            joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
-          } 
+    let joyArrowsValueWidthLeft, 
+        joyArrowsValueWidthRight, 
+        joyArrowsValueHeightTop, 
+        joyArrowsValueHeightBottom,
+        joySelect = true;
+
+    const arrowFunc = () => {
+      joyArrowsValueWidthLeft = +(firstCalcSet.allWidth - firstCalcSet.screenWidth) / 2,
+      joyArrowsValueWidthRight = +(firstCalcSet.allWidth - firstCalcSet.screenWidth) / 2,
+      joyArrowsValueHeightTop = +(firstCalcSet.allHeight - firstCalcSet.screenHeight) / 2;
+      joyArrowsValueHeightBottom = +(firstCalcSet.allHeight - firstCalcSet.screenHeight) / 2;
+      joyArrows[0].children[0].textContent = joyArrowsValueWidthLeft;
+      joyArrows[2].children[0].textContent = joyArrowsValueWidthRight;
+      joyArrows[1].children[0].textContent = joyArrowsValueHeightTop;
+      joyArrows[3].children[0].textContent = joyArrowsValueHeightBottom;
+    } 
       
           
          
-
-    plateTypeButtons.forEach((elem, i) => {
-      elem.addEventListener('click', () => {
-        plateTypeButtons.forEach((elem) => {
-          elem.classList.remove('calc-inner__plate-active');
-        });
-        elem.classList.add('calc-inner__plate-active');
-        if (elem.classList.contains('calc-inner__plate-active')) {
-          plateImages.forEach((img) => {
-            img.style.display = 'none';
+    if (plateTypeButtons) {
+      plateTypeButtons.forEach((elem, i) => {
+        elem.addEventListener('click', () => {
+          plateTypeButtons.forEach((elem) => {
+            elem.classList.remove('calc-inner__plate-active');
           });
-          
-          myFadeInFlex(plateImages[i]);
-        }
-        typeAllDeep.value = elem.dataset.deep;
-        textDeep.textContent = elem.dataset.deep;
-        firstCalcSet.deep = elem.dataset.deep;
-        buttonNext.disabled = false; 
-        plateSelect = true;
+          elem.classList.add('calc-inner__plate-active');
+          if (elem.classList.contains('calc-inner__plate-active')) {
+            plateImages.forEach((img) => {
+              img.style.display = 'none';
+            });
+            
+            myFadeInFlex(plateImages[i]);
+          }
+          typeAllDeep.value = elem.dataset.deep;
+          textDeep.textContent = elem.dataset.deep;
+          firstCalcSet.deep = elem.dataset.deep;
+          buttonNext.disabled = false; 
+          plateSelect = true;
+        });
       });
-    });
+    }
 
     if(typeAllDeep) {
       typeAllDeep.addEventListener('click', () => {
@@ -115,6 +123,7 @@ calcStepItem.forEach((elem,i) => {
         }
       });
     }
+
     if(typeAllHeight) {
       typeAllHeight.addEventListener('input', () => {
         firstCalcSet.allHeight = typeAllHeight.value;
@@ -126,33 +135,32 @@ calcStepItem.forEach((elem,i) => {
         }
       });
     }
-    
 
-    calcDiagItem.forEach((elem) => {
-      elem.addEventListener('click', () => {
-        calcDiagItem.forEach((elem) => {
-          elem.classList.remove('calc-diag__item-active');
+    if(calcDiagItem) {
+      calcDiagItem.forEach((elem) => {
+        elem.addEventListener('click', () => {
+          calcDiagItem.forEach((elem) => {
+            elem.classList.remove('calc-diag__item-active');
+          });
+          elem.classList.add('calc-diag__item-active');
+          firstCalcSet.allHeight = elem.dataset.height;
+          firstCalcSet.allWidth = elem.dataset.width;
+          firstCalcSet.diagonal = elem.dataset.diagonal;
+          typeAllHeight.value = elem.dataset.height;
+          typeAllWidth.value = elem.dataset.width;
+          textHeight.textContent = elem.dataset.height;
+          textWidth.textContent = elem.dataset.width;
+          
+          activeHeight.value = +elem.dataset.height - 70;
+          activeWidth.value = +elem.dataset.width - 70;
+          firstCalcSet.screenHeight = activeHeight.value;
+          firstCalcSet.screenWidth = activeWidth.value;
+          arrowFunc();
+          joySelect = true;
+          typeAllDeep.disabled = false;
         });
-        elem.classList.add('calc-diag__item-active');
-        firstCalcSet.allHeight = elem.dataset.height;
-        firstCalcSet.allWidth = elem.dataset.width;
-        firstCalcSet.diagonal = elem.dataset.diagonal;
-        typeAllHeight.value = elem.dataset.height;
-        typeAllWidth.value = elem.dataset.width;
-        textHeight.textContent = elem.dataset.height;
-        textWidth.textContent = elem.dataset.width;
-        
-        activeHeight.value = +elem.dataset.height - 70;
-        activeWidth.value = +elem.dataset.width - 70;
-        firstCalcSet.screenHeight = activeHeight.value;
-        firstCalcSet.screenWidth = activeWidth.value;
-        arrowFunc();
-        
-        
-
-        typeAllDeep.disabled = false;
       });
-    });
+    }
 
     if (activeWidth) {
       activeWidth.addEventListener('input', () => {
@@ -165,9 +173,12 @@ calcStepItem.forEach((elem,i) => {
           buttonNext.disabled = false;
           firstCalcSet.screenWidth = activeWidth.value;
           arrowFunc();
+          joySelect = true;
+
         }
       });
     }
+
     if (activeHeight) {
       activeHeight.addEventListener('input', () => {
         if (activeHeight.value > typeAllHeight.value - 70) {
@@ -178,10 +189,11 @@ calcStepItem.forEach((elem,i) => {
           buttonNext.disabled = false;
           firstCalcSet.screenHeight = activeHeight.value;
           arrowFunc();
-  
+          joySelect = true;
         }
       });
     }
+
     if (calcAlertButtonPrev) {
       calcAlertButtonPrev.addEventListener('click', () => {
         calcPageStepsStart.forEach((elem) => { 
@@ -198,6 +210,7 @@ calcStepItem.forEach((elem,i) => {
         typeAllDeep.value = 0;
     });
     }
+
     if (calcAlertButtonNext) {
       calcAlertButtonNext.addEventListener('click', () => {
         myFadeOut(calcOverlay);
@@ -209,7 +222,6 @@ calcStepItem.forEach((elem,i) => {
         buttonNext.disabled = false; 
     });
     }
-    
 
     let sqLeft = 1,
         sqTop = 1;
@@ -223,14 +235,11 @@ calcStepItem.forEach((elem,i) => {
         joySquare.style.top = 0  + 'px';
       });
     }
-    
 
     let intervalLeft,
         intervalRight,
         intervalTop,
         intervalBottom;
-
-    
     
     if (joyArrows) {
       const joyWarning = document.querySelector('.joy-warning');
@@ -343,13 +352,64 @@ calcStepItem.forEach((elem,i) => {
       });
     }
     
+    if(buttonRalNone) {
+      buttonRalNone.addEventListener('click', () => {
+        firstCalcSet.paint = 'Покраска не нужна';
+        buttonNext.disabled = false; 
+        buttonRalNone.classList.add('button-active');
+      });
+    }
+    if (ralTopInput) {
+      ralTopInput.addEventListener('input', () => {
+        buttonRalNone.classList.remove('button-active');
+        firstCalcSet.paint = 'Нужна покраска';
+        buttonNext.disabled = true; 
 
+        
+        if (ralTopInput.value.length >= 4 && ralBottomInput.value.length >= 4) {
+          buttonNext.disabled = false; 
+          
+        } else if (ralTopInput.value.length >= 4) {
+          ralTopInput.value = ralTopInput.value.slice(0, 4);
+        }
+        
+      });
+    }
+    if (ralBottomInput) {
+      ralBottomInput.addEventListener('input', () => {
+        buttonRalNone.classList.remove('button-active');
+        firstCalcSet.paint = 'Нужна покраска';
+        buttonNext.disabled = true; 
+
+        if (ralTopInput.value.length >= 4 && ralBottomInput.value.length >= 4) {
+          buttonNext.disabled = false; 
+
+        } else if (ralBottomInput.value.length >= 4) {
+          ralBottomInput.value = ralBottomInput.value.slice(0, 4);
+        }
+
+
+      });
+    }
+    if(paintImg) {
+      paintImg.addEventListener('click', () => {
+        const over = document.querySelector('.calc-page__overlay__paint');
+        if(paintImg.classList.contains('paint-img-active')) {
+          myFadeOut(over);
+          paintImg.classList.remove('paint-img-active');
+        } else {
+          myFadeIn(over);
+          paintImg.classList.add('paint-img-active');
+        }
+      });
+    }
 
 
 
 //BUTTONS
     buttonNext.disabled = true;      
     calcPage[i].addEventListener('click', (e) => {
+      console.log(pageCount)
       let target = e.target;
 
       if(target == buttonNext && buttonNext.disabled == false) { //NEXT BUTTON
@@ -373,13 +433,26 @@ calcStepItem.forEach((elem,i) => {
           plateSelectNext = true;
           typeAllDeep.disabled = true;
           buttonNext.textContent = 'Далее';
-        } else {
+        } else if (joySelect = true || pageCount == 2) {
+          pageCount++;
+          buttonNext.disabled = false; 
+          myFadeIn(calcPageStepsStart[pageCount]);
+          joySelect = false;
+        } 
+        else {
           pageCount++;
           myFadeIn(calcPageStepsStart[pageCount]);
           buttonNext.disabled = true; 
         }
 
-        
+        if (pageCount == 3) {
+          calcPageStepsStart.forEach((elem) => {
+            elem.style.display = 'none'
+          });
+          pageCount++;
+          buttonNext.disabled = true; 
+          myFadeIn(calcPageStepsStart[pageCount]);
+        }
         
         
         
@@ -394,6 +467,7 @@ calcStepItem.forEach((elem,i) => {
         if (pageCount == 0) {
           myFadeOut(calcPage[i]);
           console.log(pageCount + ' reset');
+          buttonNext.disabled = true; 
           
         } else if (deepClick === true) {
           buttonNext.textContent = 'Дальше';
@@ -405,6 +479,8 @@ calcStepItem.forEach((elem,i) => {
           pageCount--;
           myFadeIn(calcPageStepsStart[pageCount]);
         }
+        buttonNext.disabled = false; 
+
       }
     });
     

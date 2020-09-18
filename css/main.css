@@ -365,6 +365,21 @@ body {
   padding: 0 40px;
 }
 
+.calc-inner__right img.paint-click {
+  transition: 0.3s;
+  display: block;
+}
+
+.calc-inner__right img.paint-click.paint-img-active {
+  position: absolute;
+  z-index: 99999;
+  top: 45%;
+  transform: translateY(-50%) translateX(20%);
+  max-width: 600px;
+  height: auto;
+  left: -63%;
+}
+
 .calc-inner__right.calc-diag-arrows {
   height: 340px;
   width: 540px;
@@ -586,6 +601,43 @@ body {
   text-align: center;
   font-size: 20px;
   line-height: 1.3;
+}
+
+.calc-ral__item .button {
+  height: 50px;
+  width: 220px;
+  margin-left: 220px;
+  border: 1px solid #f1f3f5;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.3s;
+  font-weight: 700;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.calc-ral__item .button:hover {
+  transition: 0.3s;
+  color: #ffffff;
+  background-color: #742a92;
+}
+
+.calc-ral__item .button-active {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.calc-ral__item .button:focus {
+  outline: none;
+}
+
+.calc-ral__item p {
+  display: flex;
+  flex-direction: column;
+  width: 220px;
 }
 
 @media (max-width: 1199px) {
