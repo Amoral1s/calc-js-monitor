@@ -446,14 +446,15 @@ calcStepItem.forEach((elem,i) => {
           buttonNext.disabled = true; 
         }
 
-        if (pageCount == 3) {
+        if (pageCount == 2) {
           calcPageStepsStart.forEach((elem) => {
             elem.style.display = 'none'
           });
           pageCount++;
-          buttonNext.disabled = true; 
+          buttonNext.disabled = false; 
           myFadeIn(calcPageStepsStart[pageCount]);
-        }
+        } 
+        
         
         
         
