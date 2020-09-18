@@ -12,7 +12,13 @@ const firstCalcSet = {
   screenWidth: 0,
   screenHeight: 0,
   plateType: '',
-  paint: ''
+  paint: '',
+  dop: {
+    diod: 'Подсветка: не нужна',
+    stand: 'Подставка: не нужна',
+    secur: 'Защита заказа: не нужна'
+  },
+  complNeed: 'Комплектующие не нужны'
 }
 
 ///первый шаг fadein out
@@ -55,7 +61,93 @@ calcStepItem.forEach((elem,i) => {
           ralTopInput = calcPage[i].querySelector('.ral-top'),
           ralBottomInput = calcPage[i].querySelector('.ral-bottom'),
           paintImg = calcPage[i].querySelector('.paint-click'),
-          calcDopButtons = calcPage[i].querySelector('.calc-dop__button');
+          calcDopButtons = calcPage[i].querySelector('.calc-dop__button'),
+          dopDiodsButton = calcPage[i].querySelector('.dop-diods'),
+          dopStandButton = calcPage[i].querySelector('.dop-stand'),
+          dopSecurButton = calcPage[i].querySelector('.dop-security'),
+          complNoneButton = calcPage[i].querySelector('.compl-none'),
+          complNeedButton = calcPage[i].querySelector('.compl-need');
+
+
+    if (complNoneButton) {
+      complNoneButton.addEventListener('click', () => {
+        if(complNoneButton.classList.contains('calc-dop-active')) {
+          firstCalcSet.complNeed = 'Комплектующие не нужны';
+          complNoneButton.classList.remove('calc-dop-active');
+          complNeedButton.classList.remove('calc-dop-active');
+          buttonNext.disabled = false; 
+        } else {
+          firstCalcSet.complNeed = 'Комплектующие не нужны';
+          complNoneButton.classList.add('calc-dop-active');
+          complNeedButton.classList.remove('calc-dop-active');
+          buttonNext.disabled = false; 
+        }
+      });
+    }
+    if (complNeedButton) {
+      complNeedButton.addEventListener('click', () => {
+        if(complNeedButton.classList.contains('calc-dop-active')) {
+          firstCalcSet.complNeed = 'Нужны комплектующие';
+          complNeedButton.classList.remove('calc-dop-active');
+          complNoneButton.classList.remove('calc-dop-active');
+
+          buttonNext.disabled = false; 
+        } else {
+          firstCalcSet.complNeed = 'Нужны комплектующие';
+          complNeedButton.classList.add('calc-dop-active');
+          complNoneButton.classList.remove('calc-dop-active');
+          buttonNext.disabled = false; 
+        }
+      });
+    }
+    if (dopDiodsButton) {
+      dopDiodsButton.addEventListener('click', () => {
+        if(dopDiodsButton.classList.contains('calc-dop-active')) {
+          firstCalcSet.dop.secur = 'Подсветка: не нужна';
+          dopDiodsButton.classList.remove('calc-dop-active');
+          buttonNext.disabled = false; 
+
+        } else {
+          firstCalcSet.dop.diod = 'Нужна подсветка';
+          dopDiodsButton.classList.add('calc-dop-active');
+          buttonNext.disabled = false; 
+        }
+      });
+    }
+    if (dopStandButton) {
+      dopStandButton.addEventListener('click', () => {
+        if(dopStandButton.classList.contains('calc-dop-active')) {
+          firstCalcSet.dop.secur = 'Подставка: не нужна';
+          dopStandButton.classList.remove('calc-dop-active');
+          buttonNext.disabled = false; 
+
+        } else {
+          firstCalcSet.dop.stand = 'Нужна подставка';
+          dopStandButton.classList.add('calc-dop-active');
+          buttonNext.disabled = false; 
+
+        }
+
+      });
+    }
+    if (dopSecurButton) {
+      dopSecurButton.addEventListener('click', () => {
+        if (dopSecurButton.classList.contains('calc-dop-active')) {
+          firstCalcSet.dop.secur = 'Защита заказа: не нужна';
+          dopSecurButton.classList.remove('calc-dop-active');
+          buttonNext.disabled = false; 
+
+        } else {
+          firstCalcSet.dop.secur = 'Нужна защита заказа';
+          dopSecurButton.classList.add('calc-dop-active');
+          buttonNext.disabled = false; 
+
+        }
+        
+
+      });
+    }
+
           
     let joyArrowsValueWidthLeft, 
         joyArrowsValueWidthRight, 

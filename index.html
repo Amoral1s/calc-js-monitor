@@ -281,9 +281,9 @@
           <div class="num"><b>5</b> <h2>Дополнительные опции</h2></div>
         </div>
         <div class="calc-inner">
-          <div class="calc-inner__left">
+          <div class="calc-inner__left dop-wrapper">
             <div class="calc-dop__item">
-              <div class="calc-dop__button">
+              <div class="calc-dop__button dop-diods">
                 Светодиодная подсветка по периметру
               </div>
               <p>
@@ -291,7 +291,7 @@
               </p>
             </div>
             <div class="calc-dop__item">
-              <div class="calc-dop__button">
+              <div class="calc-dop__button dop-stand">
                 Напольное крепление
               </div>
               <p>
@@ -299,7 +299,7 @@
               </p>
             </div>
             <div class="calc-dop__item">
-              <div class="calc-dop__button">
+              <div class="calc-dop__button dop-security">
                 Защита заказа
               </div>
               <div class="trigger">?</div>
@@ -318,8 +318,72 @@
         </div>
       </div>
       <div class="calc-page__step">
-7
+        <div class="calc-inner__title">
+          <div class="num"><b>6</b> <h2>Комплектующие</h2></div>
+          <p>В данном разделе вы можете подобрать список необходимых комплектующих для вашего будущего Инфомата.</p>
+        </div>
+        <div class="calc-inner">
+          <div class="calc-inner__left dop-wrapper">
+            <div class="calc-dop__item">
+              <div class="calc-dop__button compl-none">
+                Не интересно
+              </div>
+            </div>
+            <div class="calc-dop__item">
+              <div class="calc-dop__button compl-need">
+                Выбрать
+              </div>
+            </div>
+          </div>
+          <div class="calc-inner__right calc-diag-arrows">
+            <img src="img/dop.png" alt="">
+          </div>
+          <div class="calc-inner__itext">
+            <textarea name="" id="" cols="30" rows="10" placeholder="Добавить примечание" class="first-calc-comment-three"></textarea>
+          </div>
+        </div>
       </div>
+      <div class="calc-page__step">
+        <div class="calc-inner__title">
+          <div class="num"><b>7</b> <h2>Оформление заказа</h2></div>
+          
+        </div>
+        <div class="calc-inner">
+          <div class="calc-inner__left dop-wrapper">
+            <div class="calc-form">
+              <form action="">
+                <input type="text" placeholder="Наименование организации">
+                <input type="text" placeholder="Контактное лицо">
+                <input type="tel" placeholder="+7 (___) ___-__-__">
+                <input type="email" placeholder="Ваш e-mail">
+                <div class="calc-form__num">
+                  <div>
+                    Укажите количество:
+                    <div class="num-trigger">?</div>
+                    <span>
+                      Действует система скидок при заказе от 100.000 руб.
+                    </span>
+                  </div>
+                  <input type="number" min="0" value="1">
+                </div>
+                <div class="calc-form__buttons">
+                  <button class="button-calculated">Получить расчет</button>
+                  <input type="submit" class="button" value="Оформить заказ">
+                </div>
+              </form>
+            </div>
+           
+          </div>
+          <div class="calc-inner__right calc-diag-arrows">
+            <img src="img/dop.png" alt="">
+           
+          </div>
+          <div class="calc-inner__itext">
+            <textarea name="" id="" cols="30" rows="10" placeholder="Добавить примечание" class="first-calc-comment-form"></textarea>
+          </div>
+        </div>
+      </div>
+      
         <button class="calc-page__prev prevss">Назад</button>
         <button class="calc-page__next prevss">Далее</button>
     </div>
