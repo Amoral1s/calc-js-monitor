@@ -607,6 +607,9 @@ calcStepItem.forEach((elem,i) => {
         myFadeIn(calcPageStepsStart[pageCount]);
         buttonNext.disabled = false; 
        }
+        else if (pageCount === 6) {
+        buttonNext.disabled = true; 
+       }
         
         
         
@@ -661,6 +664,9 @@ calcStepItem.forEach((elem,i) => {
 
         if (pageCount === 3) {
          buttonNext.disabled = false; 
+       } else if (pageCount === 5) {
+         buttonNext.disabled = false; 
+          
        }
         
       }
