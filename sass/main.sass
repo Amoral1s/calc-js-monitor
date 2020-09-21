@@ -420,7 +420,11 @@ body
 			padding: 0 40px
 			img.paint-click
 				transition: 0.3s
+				cursor: pointer
 				display: block
+				&:hover
+					transition: 0.3s
+					transform: scale(1.05)
 				&.paint-img-active
 					position: absolute
 					z-index: 99999

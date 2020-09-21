@@ -560,7 +560,13 @@ body {
 
 .calc-inner__right img.paint-click {
   transition: 0.3s;
+  cursor: pointer;
   display: block;
+}
+
+.calc-inner__right img.paint-click:hover {
+  transition: 0.3s;
+  transform: scale(1.05);
 }
 
 .calc-inner__right img.paint-click.paint-img-active {

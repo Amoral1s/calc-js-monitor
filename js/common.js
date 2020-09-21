@@ -273,6 +273,7 @@ calcStepItem.forEach((elem,i) => {
           typeAllDeep.disabled = false;
           if (elem.classList.contains('another')) {
             typeAllDeep.disabled = true;
+            buttonNext.disabled = true;
           }
         });
       });
@@ -518,8 +519,9 @@ calcStepItem.forEach((elem,i) => {
       });
     }
     if(paintImg) {
+      const over = document.querySelector('.calc-page__overlay__paint');
+
       paintImg.addEventListener('click', () => {
-        const over = document.querySelector('.calc-page__overlay__paint');
         if(paintImg.classList.contains('paint-img-active')) {
           myFadeOut(over);
           paintImg.classList.remove('paint-img-active');
@@ -527,6 +529,10 @@ calcStepItem.forEach((elem,i) => {
           myFadeIn(over);
           paintImg.classList.add('paint-img-active');
         }
+      });
+      over.addEventListener('click', () => {
+        myFadeOut(over);
+        paintImg.classList.remove('paint-img-active');
       });
     }
 
