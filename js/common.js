@@ -629,7 +629,7 @@ calcStepItem.forEach((elem,i) => {
           return
         }
 
-        if (pageCount == calcPageStepsStart.length - 1) {
+        if (pageCount == calcPageStepsStart.length - 1 && calcPageStepsStart.length > 2) {
           console.log('-3')
           buttonNext.style.display = 'block';
           pageCount--;
