@@ -161,6 +161,9 @@
           <p>Недопустимое значение!</p>
           <b>Размер активной области не может превышать размера корпуса включая обязательную рамку по периметру, размер которой не менее 35 мм</b>
           <div class="calc-page__buttons-alert">
+            <div class="calc-page__buttons-alert__button button-alert__change">
+              Изменить размер корпуса автоматически
+            </div>
             <div class="calc-page__buttons-alert__button button-alert__prev">
               Выбрать другой размер корпуса (возврат к шагу 1)
             </div>
@@ -254,16 +257,16 @@
               <div class="calc-allw__item calc-ral__item">
                 <p>
                   <b>Рама и лицевая часть</b>
-                  Укажите цвет RAL
+                  
                 </p>
-                <input type="number" value="" min="10" class="ral-top" >
+                <input type="number" value="" min="10" class="ral-top" placeholder="Укажите цвет RAL">
               </div>
               <div class="calc-allw__item calc-ral__item">
                 <p>
                   <b>Тыловая часть</b>
-                  Укажите цвет RAL
+                  
                 </p>
-                <input type="number" value="" min="10" class="ral-bottom" >
+                <input type="number" value="" min="10" class="ral-bottom"  placeholder="Укажите цвет RAL">
               </div>
               
             </div>
@@ -286,17 +289,21 @@
               <div class="calc-dop__button dop-diods">
                 Светодиодная подсветка по периметру
               </div>
-              <p>
+              <div class="trigger">?</div>
+              <b>
                 В услугу входит фрезерование отверстий под подсветку и акриловые вставки для рассеивания
-              </p>
+              </b>
             </div>
             <div class="calc-dop__item">
-              <div class="calc-dop__button dop-stand">
-                Напольное крепление
-              </div>
-              <p>
+              <select class="calc-dop__button dop-stand">
+                <option value="0">Выберите крепление</option>
+                <option value="1">Напольное крепление</option>
+                <option value="2">Настенное крепление</option>
+              </select>
+              <div class="trigger">?</div>
+              <b>
                 Крепление имеет вырезы под питание 220 вольт и RJ-45 в нижней части. И не имеет внутреннего отсека
-              </p>
+              </b>
             </div>
             <div class="calc-dop__item">
               <div class="calc-dop__button dop-security">
@@ -331,7 +338,7 @@
             </div>
             <div class="calc-dop__item">
               <div class="calc-dop__button compl-need">
-                Выбрать
+                Да, подберите
               </div>
             </div>
           </div>
@@ -345,30 +352,33 @@
       </div>
       <div class="calc-page__step">
         <div class="calc-inner__title">
-          <div class="num"><b>7</b> <h2>Оформление заказа</h2></div>
+          <div class="num"><b>7</b> <h2>Рассчет стоимости</h2></div>
           
         </div>
         <div class="calc-inner">
           <div class="calc-inner__left dop-wrapper">
             <div class="calc-form">
               <form action="">
-                <input type="text" placeholder="Наименование организации">
-                <input type="text" placeholder="Контактное лицо">
-                <input type="tel" placeholder="+7 (___) ___-__-__">
-                <input type="email" placeholder="Ваш e-mail">
+                <input class="input-data" type="text" placeholder="Наименование организации">
+                <input class="input-data" type="text" placeholder="Контактное лицо">
+                <input class="input-data" type="tel" placeholder="+7 (___) ___-__-__">
+                <input class="input-data" type="email" placeholder="Ваш e-mail">
                 <div class="calc-form__num">
                   <div>
                     Укажите количество:
                     <div class="num-trigger">?</div>
                     <span>
-                      Действует система скидок при заказе от 100.000 руб.
+                      Действует система скидок при заказе: <br>
+                      от 5 до 10 ед - 3%<br>
+                      от 11 до 15 ед. - 5%<br>
+                      от 16 до 30 ед. - 7%<br>
+                      от 30 и более ед. - 10%<br>
                     </span>
                   </div>
-                  <input type="number" min="0" value="1">
+                  <input type="number" class="input-data corp-number" min="0" value="1">
                 </div>
                 <div class="calc-form__buttons">
-                  <button class="button-calculated">Получить расчет</button>
-                  <input type="submit" class="button" value="Оформить заказ">
+                  <button type="button" class="button-calculated" disabled>Получить расчет</button>
                 </div>
               </form>
             </div>
@@ -377,6 +387,49 @@
           <div class="calc-inner__right calc-diag-arrows">
             <img src="img/dop.png" alt="">
            
+          </div>
+          <div class="calc-inner__itext">
+            <textarea name="" id="" cols="30" rows="10" placeholder="Добавить примечание" class="first-calc-comment-form"></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="calc-page__step">
+        <div class="calc-inner__title">
+          <div class="num"><b>7</b> <h2>Расчёт стоимости вашего корпуса</h2></div>
+        </div>
+        <div class="calc-inner">
+          <div class="calc-inner__left calc-calculated">
+            <div class="calc-inner__left calc-calculated__left">
+              <h4>Корпус</h4>
+              <p class="calc-row"><b>Длина: </b><span class="totals-fullheight">111</span></p>
+              <p class="calc-row"><b>Ширина: </b><span class="totals-fullwidth">111</span></p>
+              <p class="calc-row"><b>Глубина: </b><span class="totals-deep">111</span></p>
+              <h4>Смещение активной области</h4>
+              <p class="calc-row"><b>Слева: </b><span class="totals-aleft">111</span></p>
+              <p class="calc-row"><b>Справа: </b><span class="totals-aright">111</span></p>
+              <p class="calc-row"><b>Сверху: </b><span class="totals-atop">111</span></p>
+              <p class="calc-row"><b>Снизу: </b><span class="totals-abot">111</span></p>
+              <div class="calc-row__cost">
+                <h3>Итоговая стоимость</h3>
+                <strong><p class="totals-cost">111111</p>руб.</strong>
+              </div>
+            </div>
+            <div class="calc-inner__right calc-calculated__right">
+              <h4>Активная область экрана</h4>
+              <p class="calc-row"><b>Длина: </b><span class="totals-activeheight">111</span></p>
+              <p class="calc-row"><b>Ширина: </b><span class="totals-activewidth">111</span></p>
+              <h4>Цвет RAL</h4>
+              <p class="calc-row"><b>Рама и лицевая часть: </b><span class="totals-raltop">111</span></p>
+              <p class="calc-row"><b>Тыловая часть: </b><span class="totals-ralinner">111</span></p>
+              <h4>Дополнительные опции</h4>
+              <p class="calc-row"><b>Крепление: </b><span class="totals-dopstand">111</span></p>
+              <p class="calc-row"><b>Светодиодная подсветка: </b><span class="totals-dopdiod">111</span></p>
+              <p class="calc-row"><b>Защита заказа: </b><span class="totals-dopsave">111</span></p>
+              
+            </div>
+          </div>
+          <div class="calc-inner__right ">
+            <img src="img/dop.png" alt="">
           </div>
           <div class="calc-inner__itext">
             <textarea name="" id="" cols="30" rows="10" placeholder="Добавить примечание" class="first-calc-comment-form"></textarea>

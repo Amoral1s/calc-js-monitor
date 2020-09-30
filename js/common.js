@@ -13,10 +13,18 @@ const firstCalcSet = {
   screenHeight: 0,
   plateType: '',
   paint: '',
+  paintTop: 0,
+  paintBot: 0,
   dop: {
-    diod: 'Подсветка: не нужна',
-    stand: 'Подставка: не нужна',
-    secur: 'Защита заказа: не нужна'
+    diod: 'Не нужно',
+    stand: 'Не нужна',
+    secur: 'Не нужна'
+  },
+  activeSpace: {
+    left: 35,
+    right: 35,
+    top: 35,
+    bot: 35
   },
   complNeed: 'Комплектующие не нужны'
 }
@@ -52,6 +60,7 @@ calcStepItem.forEach((elem,i) => {
           activeWidth = calcPage[i].querySelector('.active-width'),
           calcAlert = calcPage[i].querySelector('.calc-page__alert'),
           calcOverlay = calcPage[i].querySelector('.calc-page__overlay'),
+          calcAlertButtonChange = calcPage[i].querySelector('.button-alert__change'),
           calcAlertButtonPrev = calcPage[i].querySelector('.button-alert__prev'),
           calcAlertButtonNext = calcPage[i].querySelector('.button-alert__next'),
           joyArrows = calcPage[i].querySelectorAll('.joy-item'),
@@ -66,9 +75,76 @@ calcStepItem.forEach((elem,i) => {
           dopStandButton = calcPage[i].querySelector('.dop-stand'),
           dopSecurButton = calcPage[i].querySelector('.dop-security'),
           complNoneButton = calcPage[i].querySelector('.compl-none'),
-          complNeedButton = calcPage[i].querySelector('.compl-need');
+          complNeedButton = calcPage[i].querySelector('.compl-need'),
+          inputData = calcPage[i].querySelectorAll('.input-data'),
+          buttonCalculated = calcPage[i].querySelector('.button-calculated');
 
 
+    const corpNumber = calcPage[i].querySelector('.corp-number'),
+          totalsFullheight = calcPage[i].querySelector('.totals-fullheight'),
+          totalsFullwidth = calcPage[i].querySelector('.totals-fullwidth'),
+          totalsDeep = calcPage[i].querySelector('.totals-deep'),
+          totalsAleft = calcPage[i].querySelector('.totals-aleft'),
+          totalsAright = calcPage[i].querySelector('.totals-aright'),
+          totalsAtop = calcPage[i].querySelector('.totals-atop'),
+          totalsAbot = calcPage[i].querySelector('.totals-abot'),
+          totalsActiveheight = calcPage[i].querySelector('.totals-activeheight'),
+          totalsActivewidth = calcPage[i].querySelector('.totals-activewidth'),
+          totalsRaltop = calcPage[i].querySelector('.totals-raltop'),
+          totalsRalinner = calcPage[i].querySelector('.totals-ralinner'),
+          totalsDopstand = calcPage[i].querySelector('.totals-dopstand'),
+          totalsDopdiod = calcPage[i].querySelector('.totals-dopdiod'),
+          totalsDopsave = calcPage[i].querySelector('.totals-dopsave');
+
+    const totalCost = () => {
+      corpNumber.textContent;
+      totalsFullheight.textContent = firstCalcSet.allHeight;
+      totalsFullwidth.textContent = firstCalcSet.allWidth;
+      totalsDeep.textContent = firstCalcSet.deep;
+      totalsActiveheight.textContent = firstCalcSet.screenHeight;
+      totalsActivewidth.textContent = firstCalcSet.screenWidth;
+      totalsRaltop.textContent = firstCalcSet.paintTop;
+      totalsRalinner.textContent = firstCalcSet.paintBot;
+      totalsDopstand.textContent = firstCalcSet.dop.stand;
+      totalsDopdiod.textContent = firstCalcSet.dop.diod;
+      totalsDopsave.textContent = firstCalcSet.dop.secur;
+      totalsAleft.textContent = firstCalcSet.activeSpace.left;
+      totalsAright.textContent = firstCalcSet.activeSpace.right;
+      totalsAtop.textContent = firstCalcSet.activeSpace.top;
+      totalsAbot.textContent = firstCalcSet.activeSpace.bot;
+      
+    };
+    
+
+    if(inputData) {
+      inputData.forEach((elem) => {
+        elem.addEventListener('input', () => {
+          if (inputData[0].value != 0 && 
+              inputData[1].value != 0 && 
+              inputData[2].value != 0 && 
+              inputData[3].value != 0 && 
+              inputData[4].value != 0) {
+            
+              buttonCalculated.disabled = false; 
+              
+          }
+        });
+      });
+    }
+    if (buttonCalculated) {
+      buttonCalculated.addEventListener('click', () => {
+        totalCost();
+        if (pageCount >= calcPageStepsStart.length - 2) {
+          buttonNext.style.display = 'none';
+        }
+        calcPageStepsStart.forEach((elem) => {
+          elem.style.display = 'none'
+        });
+        pageCount++;
+          buttonNext.disabled = false; 
+          myFadeIn(calcPageStepsStart[pageCount]);
+      });
+    }
     if (complNoneButton) {
       complNoneButton.addEventListener('click', () => {
         if(complNoneButton.classList.contains('calc-dop-active')) {
@@ -103,42 +179,45 @@ calcStepItem.forEach((elem,i) => {
     if (dopDiodsButton) {
       dopDiodsButton.addEventListener('click', () => {
         if(dopDiodsButton.classList.contains('calc-dop-active')) {
-          firstCalcSet.dop.secur = 'Подсветка: не нужна';
+          firstCalcSet.dop.secur = 'Не нужна';
           dopDiodsButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
 
         } else {
-          firstCalcSet.dop.diod = 'Нужна подсветка';
+          firstCalcSet.dop.diod = 'Нужна';
           dopDiodsButton.classList.add('calc-dop-active');
           buttonNext.disabled = false; 
         }
       });
     }
     if (dopStandButton) {
-      dopStandButton.addEventListener('click', () => {
-        if(dopStandButton.classList.contains('calc-dop-active')) {
-          firstCalcSet.dop.secur = 'Подставка: не нужна';
-          dopStandButton.classList.remove('calc-dop-active');
-          buttonNext.disabled = false; 
+      dopStandButton.addEventListener('change', () => {
 
-        } else {
-          firstCalcSet.dop.stand = 'Нужна подставка';
-          dopStandButton.classList.add('calc-dop-active');
+        if (dopStandButton.value == 0) {
+          firstCalcSet.dop.secur = 'Не нужно';
           buttonNext.disabled = false; 
-
+        } if (dopStandButton.value == 1) {
+          buttonNext.disabled = false; 
+          firstCalcSet.dop.stand = 'Напольное крепление';
+        } if (dopStandButton.value == 2) {
+          buttonNext.disabled = false; 
+          firstCalcSet.dop.stand = 'Настенное крепление';
         }
-
+         if (dopStandButton.value == 3) {
+          buttonNext.disabled = false; 
+          firstCalcSet.dop.secur = 'Не нужно';
+        }
       });
     }
     if (dopSecurButton) {
       dopSecurButton.addEventListener('click', () => {
         if (dopSecurButton.classList.contains('calc-dop-active')) {
-          firstCalcSet.dop.secur = 'Защита заказа: не нужна';
+          firstCalcSet.dop.secur = 'Не нужна';
           dopSecurButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
 
         } else {
-          firstCalcSet.dop.secur = 'Нужна защита заказа';
+          firstCalcSet.dop.secur = 'Нужна';
           dopSecurButton.classList.add('calc-dop-active');
           buttonNext.disabled = false; 
 
@@ -208,9 +287,8 @@ calcStepItem.forEach((elem,i) => {
     if (typeAllWidth) {
       typeAllWidth.addEventListener('input', () => {
         if (typeAllWidth.value < 180) {
-          typeAllDeep.disabled = true;
+          buttonNext.disabled = true;
           arrowFunc();
-
         }
         else {
           typeAllDeep.disabled = false;
@@ -218,6 +296,7 @@ calcStepItem.forEach((elem,i) => {
           textWidth.textContent = typeAllWidth.value;
           activeWidth.value = typeAllWidth.value - 70;
           firstCalcSet.screenWidth = typeAllWidth.value - 70;
+          buttonNext.disabled = true; 
           arrowFunc();
           if (typeAllDeep.value > 10 && typeAllHeight.value > 10) {
             buttonNext.disabled = false; 
@@ -229,7 +308,7 @@ calcStepItem.forEach((elem,i) => {
     if(typeAllHeight) {
       typeAllHeight.addEventListener('input', () => {
         if (typeAllHeight.value < 180) {
-          typeAllDeep.disabled = true;
+          buttonNext.disabled = true;
           arrowFunc();
         }
         else {
@@ -342,8 +421,20 @@ calcStepItem.forEach((elem,i) => {
       calcAlertButtonNext.addEventListener('click', () => {
         myFadeOut(calcOverlay);
         myFadeOut(calcAlert);
-        activeHeight.value = typeAllHeight.value - 70;
-        activeWidth.value = typeAllWidth.value - 70;
+        activeHeight.value = +typeAllHeight.value - 70;
+        activeWidth.value = +typeAllWidth.value - 70;
+        firstCalcSet.screenHeight = activeHeight.value;
+        firstCalcSet.screenWidth = activeWidth.value;
+        buttonNext.disabled = false; 
+    });
+    }
+
+    if (calcAlertButtonChange) {
+      calcAlertButtonChange.addEventListener('click', () => {
+        myFadeOut(calcOverlay);
+        myFadeOut(calcAlert);
+        typeAllHeight.value = +activeHeight.value + 70;
+        typeAllWidth.value = +activeWidth.value + 70;
         firstCalcSet.screenHeight = activeHeight.value;
         firstCalcSet.screenWidth = activeWidth.value;
         buttonNext.disabled = false; 
@@ -360,6 +451,10 @@ calcStepItem.forEach((elem,i) => {
         sqTop = 1;
         joySquare.style.left =  0  + 'px';
         joySquare.style.top = 0  + 'px';
+        firstCalcSet.activeSpace.left = 35;
+          firstCalcSet.activeSpace.right = 35;
+          firstCalcSet.activeSpace.top = 35;
+          firstCalcSet.activeSpace.bot = 35;
       });
     }
 
@@ -376,6 +471,11 @@ calcStepItem.forEach((elem,i) => {
           clearInterval(intervalRight);
           clearInterval(intervalTop);
           clearInterval(intervalBottom);
+
+          firstCalcSet.activeSpace.left = joyArrowsValueWidthLeft;
+          firstCalcSet.activeSpace.right = joyArrowsValueWidthRight;
+          firstCalcSet.activeSpace.top = joyArrowsValueHeightTop;
+          firstCalcSet.activeSpace.bot = joyArrowsValueHeightBottom;
         });
         
         elem.addEventListener('mousedown', () => {
@@ -482,6 +582,8 @@ calcStepItem.forEach((elem,i) => {
     if(buttonRalNone) {
       buttonRalNone.addEventListener('click', () => {
         firstCalcSet.paint = 'Покраска не нужна';
+        firstCalcSet.paintTop = 'нет';
+        firstCalcSet.paintBot = 'нет';
         buttonNext.disabled = false; 
         buttonRalNone.classList.add('button-active');
       });
@@ -491,11 +593,11 @@ calcStepItem.forEach((elem,i) => {
         buttonRalNone.classList.remove('button-active');
         firstCalcSet.paint = 'Нужна покраска';
         buttonNext.disabled = true; 
-
         
         if (ralTopInput.value.length >= 4 && ralBottomInput.value.length >= 4) {
           buttonNext.disabled = false; 
-          
+          firstCalcSet.paintTop = ralTopInput.value;
+          firstCalcSet.paintBot = ralBottomInput.value;
         } else if (ralTopInput.value.length >= 4) {
           ralTopInput.value = ralTopInput.value.slice(0, 4);
         }
@@ -510,6 +612,8 @@ calcStepItem.forEach((elem,i) => {
 
         if (ralTopInput.value.length >= 4 && ralBottomInput.value.length >= 4) {
           buttonNext.disabled = false; 
+          firstCalcSet.paintTop = ralTopInput.value;
+          firstCalcSet.paintBot = ralBottomInput.value;
 
         } else if (ralBottomInput.value.length >= 4) {
           ralBottomInput.value = ralBottomInput.value.slice(0, 4);
@@ -541,11 +645,9 @@ calcStepItem.forEach((elem,i) => {
 //BUTTONS
     buttonNext.disabled = true;      
     calcPage[i].addEventListener('click', (e) => {
-      console.log(plateSelect);
-      console.log(plateSelectNext);
-      console.log(deepClick);
-      console.log(pageCount)
-      console.log(firstCalcSet)
+
+      console.log(firstCalcSet);
+      
       let target = e.target;
 
       if(target == buttonNext && buttonNext.disabled == false) { //NEXT BUTTON
@@ -574,7 +676,6 @@ calcStepItem.forEach((elem,i) => {
           myFadeIn(calcPageStepsStart[pageCount]);
           joySelect = false;
         } else if (pageCount == 2) {
-          console.log('page 2')
 
           calcPageStepsStart.forEach((elem) => {
             elem.style.display = 'none'
@@ -592,7 +693,6 @@ calcStepItem.forEach((elem,i) => {
         
         
        if (pageCount === 4) {
-          console.log('page 3')
          buttonNext.disabled = true; 
          calcPageStepsStart.forEach((elem) => {
            elem.style.display = 'none'
@@ -619,7 +719,6 @@ calcStepItem.forEach((elem,i) => {
           elem.style.display = 'none'
         });
         if (pageCount == 2) {
-          console.log('123')
           buttonNext.textContent = 'Далee';
           buttonNext.disabled = true; 
           pageCount = 0;
@@ -630,14 +729,12 @@ calcStepItem.forEach((elem,i) => {
         }
 
         if (pageCount == calcPageStepsStart.length - 1 && calcPageStepsStart.length > 2) {
-          console.log('-3')
           buttonNext.style.display = 'block';
           pageCount--;
           myFadeIn(calcPageStepsStart[pageCount]);
 
         } else if (pageCount == 0) {
           myFadeOut(calcPage[i]);
-          console.log(pageCount + ' reset');
           buttonNext.disabled = true; 
           
         } else if (deepClick === true) {
