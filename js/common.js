@@ -16,8 +16,8 @@ const firstCalcSet = {
   paintTop: 0,
   paintBot: 0,
   dop: {
-    diod: 'Не нужно',
-    stand: 'Не нужна',
+    diod: 'Не нужна',
+    stand: 'Не нужно',
     secur: 'Не нужна'
   },
   activeSpace: {
@@ -31,11 +31,12 @@ const firstCalcSet = {
 
 ///первый шаг fadein out
 calcStepItem.forEach((elem,i) => {
-  elem.addEventListener('click', () => {
+  elem.addEventListener('click', (e) => {
     calcPage.forEach((elem) => {
       elem.style.display = 'none';
     });
     myFadeIn(calcPage[i]);
+    
     const calcPageStepsStart = calcPage[i].querySelectorAll('.calc-page__step');
     calcPageStepsStart.forEach((elem) => {
       elem.style.display = 'none'
@@ -115,7 +116,9 @@ calcStepItem.forEach((elem,i) => {
       
     };
     
-
+    if (typeAllDeep.value > 0) {
+      buttonNext.disabled = false;
+    }
     if(inputData) {
       inputData.forEach((elem) => {
         elem.addEventListener('input', () => {
@@ -192,10 +195,12 @@ calcStepItem.forEach((elem,i) => {
     }
     if (dopStandButton) {
       dopStandButton.addEventListener('change', () => {
-
+        dopStandButton.classList.add('calc-dop-active');
         if (dopStandButton.value == 0) {
           firstCalcSet.dop.secur = 'Не нужно';
           buttonNext.disabled = false; 
+          dopStandButton.classList.remove('calc-dop-active');
+
         } if (dopStandButton.value == 1) {
           buttonNext.disabled = false; 
           firstCalcSet.dop.stand = 'Напольное крепление';
@@ -250,6 +255,7 @@ calcStepItem.forEach((elem,i) => {
     if (plateTypeButtons) {
       plateTypeButtons.forEach((elem, i) => {
         elem.addEventListener('click', () => {
+          plateSelectNext = false;
           plateTypeButtons.forEach((elem) => {
             elem.classList.remove('calc-inner__plate-active');
           });
@@ -275,9 +281,13 @@ calcStepItem.forEach((elem,i) => {
         calcPageStepsStart.forEach((elem) => {
           elem.style.display = 'none'
         });
-        pageCount++;
+        pageCount = 1;
         myFadeIn(calcPageStepsStart[pageCount]);
         buttonNext.textContent = 'Выбрать';
+        buttonNext.disabled = true;
+        plateTypeButtons.forEach((e) => {
+          e.classList.remove('calc-inner__plate-active');
+        })
         deepClick = true;
 
         arrowFunc();
@@ -643,10 +653,17 @@ calcStepItem.forEach((elem,i) => {
    
 
 //BUTTONS
-    buttonNext.disabled = true;      
-    calcPage[i].addEventListener('click', (e) => {
+    buttonNext.disabled = true; 
+    
+    let calcPageI = calcPage[i];
+    
 
-      console.log(firstCalcSet);
+    let calcPageIClick = function(e) {
+
+      console.log(pageCount);
+      console.log(plateSelectNext + ' plateSelectNext');
+      console.log(plateSelect + ' plateSelect');
+      console.log(deepClick + ' deepClick');
       
       let target = e.target;
 
@@ -676,6 +693,7 @@ calcStepItem.forEach((elem,i) => {
           myFadeIn(calcPageStepsStart[pageCount]);
           joySelect = false;
         } else if (pageCount == 2) {
+         
 
           calcPageStepsStart.forEach((elem) => {
             elem.style.display = 'none'
@@ -689,8 +707,9 @@ calcStepItem.forEach((elem,i) => {
           myFadeIn(calcPageStepsStart[pageCount]);
           buttonNext.disabled = true; 
         }
-
-        
+        if (pageCount == 2) {
+          deepClick = false;
+        }
         
        if (pageCount === 4) {
          buttonNext.disabled = true; 
@@ -718,57 +737,72 @@ calcStepItem.forEach((elem,i) => {
         calcPageStepsStart.forEach((elem) => { 
           elem.style.display = 'none'
         });
-        if (pageCount == 2) {
-          buttonNext.textContent = 'Далee';
-          buttonNext.disabled = true; 
-          pageCount = 0;
-          myFadeIn(calcPageStepsStart[pageCount]);
-          deepClick = false;
-          plateSelect = false;
-          return
-        }
 
         if (pageCount == calcPageStepsStart.length - 1 && calcPageStepsStart.length > 2) {
           buttonNext.style.display = 'block';
           pageCount--;
           myFadeIn(calcPageStepsStart[pageCount]);
-
         } else if (pageCount == 0) {
+          calcDiagItem.forEach((e) => {
+            e.classList.remove('calc-diag__item-active');
+          });
           myFadeOut(calcPage[i]);
-          buttonNext.disabled = true; 
+          typeAllDeep.value = 0;
           
+          typeAllDeep.disabled = true;
+          typeAllHeight.value = 0;
+          typeAllWidth.value = 0
+          calcPageI.removeEventListener("click", calcPageIClick);
+
+
         } else if (deepClick === true) {
           buttonNext.textContent = 'Далee';
-          buttonNext.disabled = true; 
-          pageCount--;
+          pageCount = 0;
           myFadeIn(calcPageStepsStart[pageCount]);
+          pageCount = 1;
           deepClick = false;
+          console.log('lols')
+          
         } 
          else if (plateSelect === true && plateSelectNext === false) {
           buttonNext.textContent = 'Далee';
-          buttonNext.disabled = true; 
           pageCount = 0;
           myFadeIn(calcPageStepsStart[pageCount]);
           deepClick = false;
           plateSelect = false;
-        } 
-        else {
+
+        } else if (pageCount == 2) {
+          console.log(1111)
+          buttonNext.textContent = 'Далee';
+          pageCount = 0;
+          myFadeIn(calcPageStepsStart[pageCount]);
+          deepClick = false;
+          plateSelect = false;
+          plateSelectNext = true;
+        } else {
           buttonNext.style.display = 'block';
           pageCount--;
           myFadeIn(calcPageStepsStart[pageCount]);
-          buttonNext.disabled = false; 
+
         }
 
-        if (pageCount === 3) {
+       /*  if (pageCount === 3) {
          buttonNext.disabled = false; 
        } else if (pageCount === 5) {
          buttonNext.disabled = false; 
           
-       }
+       } */
         
       }
-    });
+    };
+    calcPageI.addEventListener('click', calcPageIClick);
     
+
+
+
+
+
+    //end
   }, { once: false });
   
 });
