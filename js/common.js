@@ -26,7 +26,8 @@ const firstCalcSet = {
     top: 35,
     bot: 35
   },
-  complNeed: 'Комплектующие не нужны'
+  complNeed: 'Комплектующие не нужны',
+  count: 1
 }
 
 ///первый шаг fadein out
@@ -96,7 +97,14 @@ calcStepItem.forEach((elem,i) => {
           totalsDopstand = calcPage[i].querySelector('.totals-dopstand'),
           totalsDopdiod = calcPage[i].querySelector('.totals-dopdiod'),
           totalsDopsave = calcPage[i].querySelector('.totals-dopsave');
+          totalsCount = calcPage[i].querySelector('.totals-count');
 
+          if (corpNumber) {
+            corpNumber.addEventListener('change', () => {
+              firstCalcSet.count = corpNumber.value;
+              totalsCount.textContent = corpNumber.value;
+            });
+          }
     const totalCost = () => {
       corpNumber.textContent;
       totalsFullheight.textContent = firstCalcSet.allHeight;
@@ -115,10 +123,12 @@ calcStepItem.forEach((elem,i) => {
       totalsAbot.textContent = firstCalcSet.activeSpace.bot;
       
     };
-    
-    if (typeAllDeep.value > 0) {
-      buttonNext.disabled = false;
+    if (typeAllDeep) {
+      if (typeAllDeep.value > 0) {
+        buttonNext.disabled = false;
+      }
     }
+    
     if(inputData) {
       inputData.forEach((elem) => {
         elem.addEventListener('input', () => {
@@ -462,9 +472,13 @@ calcStepItem.forEach((elem,i) => {
         joySquare.style.left =  0  + 'px';
         joySquare.style.top = 0  + 'px';
         firstCalcSet.activeSpace.left = 35;
-          firstCalcSet.activeSpace.right = 35;
-          firstCalcSet.activeSpace.top = 35;
-          firstCalcSet.activeSpace.bot = 35;
+        firstCalcSet.activeSpace.right = 35;
+        firstCalcSet.activeSpace.top = 35;
+        firstCalcSet.activeSpace.bot = 35;
+        joyArrows.forEach((elem) => {
+          elem.children[0].textContent = 35;
+        });
+        
       });
     }
 
@@ -596,6 +610,8 @@ calcStepItem.forEach((elem,i) => {
         firstCalcSet.paintBot = 'нет';
         buttonNext.disabled = false; 
         buttonRalNone.classList.add('button-active');
+        ralBottomInput.value = '';
+        ralTopInput.value = '';
       });
     }
     if (ralTopInput) {
@@ -624,6 +640,7 @@ calcStepItem.forEach((elem,i) => {
           buttonNext.disabled = false; 
           firstCalcSet.paintTop = ralTopInput.value;
           firstCalcSet.paintBot = ralBottomInput.value;
+          ralBottomInput.value = ralBottomInput.value.slice(0, 4);
 
         } else if (ralBottomInput.value.length >= 4) {
           ralBottomInput.value = ralBottomInput.value.slice(0, 4);
@@ -743,17 +760,16 @@ calcStepItem.forEach((elem,i) => {
           pageCount--;
           myFadeIn(calcPageStepsStart[pageCount]);
         } else if (pageCount == 0) {
+          window.location.reload()
           calcDiagItem.forEach((e) => {
             e.classList.remove('calc-diag__item-active');
           });
           myFadeOut(calcPage[i]);
           typeAllDeep.value = 0;
-          
           typeAllDeep.disabled = true;
           typeAllHeight.value = 0;
           typeAllWidth.value = 0
           calcPageI.removeEventListener("click", calcPageIClick);
-
 
         } else if (deepClick === true) {
           buttonNext.textContent = 'Далee';
