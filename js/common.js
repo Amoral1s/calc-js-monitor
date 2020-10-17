@@ -9,16 +9,21 @@ const firstCalcSet = {
   allHeight: 0,
   allWidth: 0,
   deep: 0,
+  deepVal: 0,
   screenWidth: 0,
   screenHeight: 0,
-  plateType: '',
+  plateType: 0,
   paint: '',
+  paintVal: 0,
   paintTop: 0,
   paintBot: 0,
   dop: {
     diod: 'Не нужна',
+    diodVal: 0,
     stand: 'Не нужно',
-    secur: 'Не нужна'
+    secur: 'Не нужна',
+    securVal: 0,
+    standVal: 0
   },
   activeSpace: {
     left: 35,
@@ -33,6 +38,7 @@ const firstCalcSet = {
 ///первый шаг fadein out
 calcStepItem.forEach((elem,i) => {
   elem.addEventListener('click', (e) => {
+    
     calcPage.forEach((elem) => {
       elem.style.display = 'none';
     });
@@ -96,15 +102,17 @@ calcStepItem.forEach((elem,i) => {
           totalsRalinner = calcPage[i].querySelector('.totals-ralinner'),
           totalsDopstand = calcPage[i].querySelector('.totals-dopstand'),
           totalsDopdiod = calcPage[i].querySelector('.totals-dopdiod'),
-          totalsDopsave = calcPage[i].querySelector('.totals-dopsave');
-          totalsCount = calcPage[i].querySelector('.totals-count');
+          totalsDopsave = calcPage[i].querySelector('.totals-dopsave'),
+          totalsCount = calcPage[i].querySelector('.totals-count'),
+          totalsCost = calcPage[i].querySelector('.totals-cost');
 
-          if (corpNumber) {
-            corpNumber.addEventListener('change', () => {
-              firstCalcSet.count = corpNumber.value;
-              totalsCount.textContent = corpNumber.value;
-            });
-          }
+      if (corpNumber) {
+        corpNumber.addEventListener('change', () => {
+          firstCalcSet.count = corpNumber.value;
+          totalsCount.textContent = corpNumber.value;
+          console.log(corpNumber.value)
+        });
+      }
     const totalCost = () => {
       corpNumber.textContent;
       totalsFullheight.textContent = firstCalcSet.allHeight;
@@ -146,6 +154,7 @@ calcStepItem.forEach((elem,i) => {
     }
     if (buttonCalculated) {
       buttonCalculated.addEventListener('click', () => {
+
         totalCost();
         if (pageCount >= calcPageStepsStart.length - 2) {
           buttonNext.style.display = 'none';
@@ -154,8 +163,11 @@ calcStepItem.forEach((elem,i) => {
           elem.style.display = 'none'
         });
         pageCount++;
-          buttonNext.disabled = false; 
-          myFadeIn(calcPageStepsStart[pageCount]);
+        buttonNext.disabled = false; 
+        myFadeIn(calcPageStepsStart[pageCount]);
+
+        calcAllHeight();
+       
       });
     }
     if (complNoneButton) {
@@ -195,9 +207,10 @@ calcStepItem.forEach((elem,i) => {
           firstCalcSet.dop.secur = 'Не нужна';
           dopDiodsButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
-
+          firstCalcSet.dop.diodVal = 0;
         } else {
           firstCalcSet.dop.diod = 'Нужна';
+          firstCalcSet.dop.diodVal = 1;
           dopDiodsButton.classList.add('calc-dop-active');
           buttonNext.disabled = false; 
         }
@@ -207,20 +220,23 @@ calcStepItem.forEach((elem,i) => {
       dopStandButton.addEventListener('change', () => {
         dopStandButton.classList.add('calc-dop-active');
         if (dopStandButton.value == 0) {
-          firstCalcSet.dop.secur = 'Не нужно';
+          firstCalcSet.dop.stand = 'Не нужно';
           buttonNext.disabled = false; 
           dopStandButton.classList.remove('calc-dop-active');
-
+          firstCalcSet.dop.standVal = 0;
         } if (dopStandButton.value == 1) {
           buttonNext.disabled = false; 
           firstCalcSet.dop.stand = 'Напольное крепление';
+          firstCalcSet.dop.standVal = 1;
         } if (dopStandButton.value == 2) {
           buttonNext.disabled = false; 
           firstCalcSet.dop.stand = 'Настенное крепление';
+          firstCalcSet.dop.standVal = 2;
         }
          if (dopStandButton.value == 3) {
           buttonNext.disabled = false; 
-          firstCalcSet.dop.secur = 'Не нужно';
+          firstCalcSet.dop.stand = 'Не нужно';
+          firstCalcSet.dop.standVal = 0;
         }
       });
     }
@@ -230,11 +246,13 @@ calcStepItem.forEach((elem,i) => {
           firstCalcSet.dop.secur = 'Не нужна';
           dopSecurButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
+          firstCalcSet.dop.securVal = 0;
 
         } else {
           firstCalcSet.dop.secur = 'Нужна';
           dopSecurButton.classList.add('calc-dop-active');
           buttonNext.disabled = false; 
+          firstCalcSet.dop.securVal = 1;
 
         }
         
@@ -280,6 +298,7 @@ calcStepItem.forEach((elem,i) => {
           typeAllDeep.value = elem.dataset.deep;
           textDeep.textContent = elem.dataset.deep;
           firstCalcSet.deep = elem.dataset.deep;
+          firstCalcSet.deepVal = i;
           buttonNext.disabled = false; 
           plateSelect = true;
         });
@@ -606,6 +625,7 @@ calcStepItem.forEach((elem,i) => {
     if(buttonRalNone) {
       buttonRalNone.addEventListener('click', () => {
         firstCalcSet.paint = 'Покраска не нужна';
+        firstCalcSet.paintVal = 0;
         firstCalcSet.paintTop = 'нет';
         firstCalcSet.paintBot = 'нет';
         buttonNext.disabled = false; 
@@ -619,7 +639,8 @@ calcStepItem.forEach((elem,i) => {
         buttonRalNone.classList.remove('button-active');
         firstCalcSet.paint = 'Нужна покраска';
         buttonNext.disabled = true; 
-        
+        firstCalcSet.paintVal = 1;
+
         if (ralTopInput.value.length >= 4 && ralBottomInput.value.length >= 4) {
           buttonNext.disabled = false; 
           firstCalcSet.paintTop = ralTopInput.value;
@@ -635,6 +656,7 @@ calcStepItem.forEach((elem,i) => {
         buttonRalNone.classList.remove('button-active');
         firstCalcSet.paint = 'Нужна покраска';
         buttonNext.disabled = true; 
+        firstCalcSet.paintVal = 1;
 
         if (ralTopInput.value.length >= 4 && ralBottomInput.value.length >= 4) {
           buttonNext.disabled = false; 
@@ -676,11 +698,9 @@ calcStepItem.forEach((elem,i) => {
     
 
     let calcPageIClick = function(e) {
-
-      console.log(pageCount);
-      console.log(plateSelectNext + ' plateSelectNext');
-      console.log(plateSelect + ' plateSelect');
-      console.log(deepClick + ' deepClick');
+      console.log(firstCalcSet);
+      calcAllHeight();
+      
       
       let target = e.target;
 
@@ -754,6 +774,7 @@ calcStepItem.forEach((elem,i) => {
         calcPageStepsStart.forEach((elem) => { 
           elem.style.display = 'none'
         });
+        buttonNext.disabled = false; 
 
         if (pageCount == calcPageStepsStart.length - 1 && calcPageStepsStart.length > 2) {
           buttonNext.style.display = 'block';
@@ -788,7 +809,6 @@ calcStepItem.forEach((elem,i) => {
           plateSelect = false;
 
         } else if (pageCount == 2) {
-          console.log(1111)
           buttonNext.textContent = 'Далee';
           pageCount = 0;
           myFadeIn(calcPageStepsStart[pageCount]);
@@ -815,7 +835,59 @@ calcStepItem.forEach((elem,i) => {
     
 
 
+    let calcAllHeight = () => {
+      let calcPogon = +calcPage[i].querySelector('.hiddenPogon').textContent,
+          calcProfile = Math.round((firstCalcSet.allWidth * 2 + firstCalcSet.allHeight * 2) / 1000 * calcPogon),
+          calcUgolok = +calcPage[i].querySelector('.hiddenUgol').textContent,
+          calcRaboty = +calcPage[i].querySelector('.hiddenWork').textContent,
+          calcRezka = +calcPage[i].querySelector('.hiddenLicevaya').textContent,
+          calcLicevaya = Math.round((firstCalcSet.allWidth * firstCalcSet.allHeight) / 10000 * calcRezka),
+          calcRezkaTilov = calcPage[i].querySelector('.hiddenTil').textContent,
+          calcTilovaya = Math.round((firstCalcSet.allWidth * firstCalcSet.allHeight) / 10000 * calcRezkaTilov),
+          calcCostCronshtein = +calcPage[i].querySelector('.hiddenKron').textContent,
+          calcKronshtein = Math.round((calcCostCronshtein * firstCalcSet.allHeight) * 2);
+          calcKronshteinECost = +calcPage[i].querySelector('.hiddenKronE').textContent,
+          calcKronshteinEE = Math.round(calcKronshteinECost * 4),
+          calcTypeOne = +calcPage[i].querySelector('.hiddenType1').textContent,
+          calcTypeTwo = +calcPage[i].querySelector('.hiddenType2').textContent,
+          calcTypeThree = +calcPage[i].querySelector('.hiddenType3').textContent;
+          calcPaintCost = +calcPage[i].querySelector('.hiddenPaint').textContent,
+          calcPaint = Math.round((firstCalcSet.allWidth * firstCalcSet.allHeight) / 10000 * calcPaintCost),
+          calcDiod = +calcPage[i].querySelector('.hiddenDiod').textContent,
+          calcFloor = +calcPage[i].querySelector('.hiddenFloor').textContent,
+          calcNoFloor = +calcPage[i].querySelector('.hiddenWall').textContent,
+          calcSave = +calcPage[i].querySelector('.hiddenSave').textContent,
+          calcAll = Math.round(calcProfile + calcUgolok + calcRaboty + calcLicevaya + calcTilovaya + calcKronshtein + calcKronshteinEE);
 
+      if (firstCalcSet.deepVal == 0) {
+        calcAll = calcAll + +calcTypeOne;
+      } else if (firstCalcSet.deepVal == 1) {
+        calcAll = calcAll + +calcTypeTwo;
+      } else if (firstCalcSet.deepVal == 2) {
+        calcAll = calcAll + +calcTypeThree;
+      }
+      
+      if (firstCalcSet.dop.diodVal == 1) {
+        calcAll = calcAll + +calcDiod;
+      } 
+
+      if (firstCalcSet.dop.standVal == 1) {
+        calcAll = calcAll + +calcFloor;
+      } else if (firstCalcSet.dop.standVal == 2) {
+        calcAll = calcAll + +calcNoFloor;
+      }
+      
+      if (firstCalcSet.dop.securVal == 1) {
+        calcAll = calcAll + +calcSave;
+      }
+      if (firstCalcSet.paintVal == 1) {
+        calcAll = calcAll + +calcPaint;
+      }
+
+      calcAll = +calcAll * +firstCalcSet.count;
+      totalsCost.textContent = calcAll;
+      console.log(calcAll);
+    };
 
 
     //end

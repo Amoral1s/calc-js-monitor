@@ -635,6 +635,10 @@ body {
   left: 0;
 }
 
+.calc-page__hidden {
+  display: none;
+}
+
 .calc-page__buttons-alert {
   display: flex;
   justify-content: space-between;
@@ -888,6 +892,7 @@ body {
   margin: 0;
   margin-left: 20px;
   font-size: 20px;
+  margin-right: 10px;
 }
 
 .calc-calculated .calc-row span {
