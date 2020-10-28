@@ -857,7 +857,8 @@ calcStepItem.forEach((elem,i) => {
           calcFloor = +calcPage[i].querySelector('.hiddenFloor').textContent,
           calcNoFloor = +calcPage[i].querySelector('.hiddenWall').textContent,
           calcSave = +calcPage[i].querySelector('.hiddenSave').textContent,
-          calcAll = Math.round(calcProfile + calcUgolok + calcRaboty + calcLicevaya + calcTilovaya + calcKronshtein + calcKronshteinEE);
+          calcAll = Math.round(calcProfile + calcUgolok + calcRaboty + calcLicevaya + calcTilovaya + calcKronshtein + calcKronshteinEE),
+          calcMarge = +calcPage[i].querySelector('.hiddenMarge').textContent;
 
       if (firstCalcSet.deepVal == 0) {
         calcAll = calcAll + +calcTypeOne;
@@ -884,7 +885,25 @@ calcStepItem.forEach((elem,i) => {
         calcAll = calcAll + +calcPaint;
       }
 
-      calcAll = +calcAll * +firstCalcSet.count;
+      if (firstCalcSet.count <= 9) {
+
+        calcAll = Math.round((+calcAll * +firstCalcSet.count) * +calcMarge);
+
+      } else if (firstCalcSet.count >= 10 && firstCalcSet.count <= 20) {
+
+        calcAll = Math.round((+calcAll * +firstCalcSet.count - ((+calcAll * +firstCalcSet.count) * 0.05)) * +calcMarge);
+
+      } else if (firstCalcSet.count >= 21 && firstCalcSet.count <= 39) {
+
+        calcAll = Math.round((+calcAll * +firstCalcSet.count -  ((+calcAll * +firstCalcSet.count) * 0.07)) * +calcMarge);
+
+      } else if (firstCalcSet.count >= 40) {
+
+        calcAll = Math.round((+calcAll * +firstCalcSet.count - ((+calcAll * +firstCalcSet.count) * 0.10)) * +calcMarge);
+
+      }
+      
+
       totalsCost.textContent = calcAll;
       console.log(calcAll);
     };
