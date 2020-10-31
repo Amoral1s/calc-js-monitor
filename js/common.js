@@ -31,7 +31,7 @@ const firstCalcSet = {
     top: 35,
     bot: 35
   },
-  complNeed: 'Комплектующие не нужны',
+  complNeed: 'Не нужны',
   count: 1
 }
 
@@ -104,7 +104,8 @@ calcStepItem.forEach((elem,i) => {
           totalsDopdiod = calcPage[i].querySelector('.totals-dopdiod'),
           totalsDopsave = calcPage[i].querySelector('.totals-dopsave'),
           totalsCount = calcPage[i].querySelector('.totals-count'),
-          totalsCost = calcPage[i].querySelector('.totals-cost');
+          totalsCost = calcPage[i].querySelector('.totals-cost'),
+          totalsComplects = calcPage[i].querySelector('.totals-complects');
 
       if (corpNumber) {
         corpNumber.addEventListener('change', () => {
@@ -129,6 +130,7 @@ calcStepItem.forEach((elem,i) => {
       totalsAright.textContent = firstCalcSet.activeSpace.right;
       totalsAtop.textContent = firstCalcSet.activeSpace.top;
       totalsAbot.textContent = firstCalcSet.activeSpace.bot;
+      totalsComplects.textContent = firstCalcSet.complNeed;
       
     };
     if (typeAllDeep) {
@@ -173,12 +175,12 @@ calcStepItem.forEach((elem,i) => {
     if (complNoneButton) {
       complNoneButton.addEventListener('click', () => {
         if(complNoneButton.classList.contains('calc-dop-active')) {
-          firstCalcSet.complNeed = 'Комплектующие не нужны';
+          firstCalcSet.complNeed = 'Не нужны';
           complNoneButton.classList.remove('calc-dop-active');
           complNeedButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
         } else {
-          firstCalcSet.complNeed = 'Комплектующие не нужны';
+          firstCalcSet.complNeed = 'Не нужны';
           complNoneButton.classList.add('calc-dop-active');
           complNeedButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
@@ -188,13 +190,13 @@ calcStepItem.forEach((elem,i) => {
     if (complNeedButton) {
       complNeedButton.addEventListener('click', () => {
         if(complNeedButton.classList.contains('calc-dop-active')) {
-          firstCalcSet.complNeed = 'Нужны комплектующие';
+          firstCalcSet.complNeed = 'Нужны';
           complNeedButton.classList.remove('calc-dop-active');
           complNoneButton.classList.remove('calc-dop-active');
 
           buttonNext.disabled = false; 
         } else {
-          firstCalcSet.complNeed = 'Нужны комплектующие';
+          firstCalcSet.complNeed = 'Нужны';
           complNeedButton.classList.add('calc-dop-active');
           complNoneButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
@@ -490,13 +492,16 @@ calcStepItem.forEach((elem,i) => {
         sqTop = 1;
         joySquare.style.left =  0  + 'px';
         joySquare.style.top = 0  + 'px';
-        firstCalcSet.activeSpace.left = 35;
-        firstCalcSet.activeSpace.right = 35;
-        firstCalcSet.activeSpace.top = 35;
-        firstCalcSet.activeSpace.bot = 35;
-        joyArrows.forEach((elem) => {
-          elem.children[0].textContent = 35;
-        });
+        firstCalcSet.activeSpace.left = +(firstCalcSet.allWidth - firstCalcSet.screenWidth) / 2;
+        firstCalcSet.activeSpace.right = +(firstCalcSet.allWidth - firstCalcSet.screenWidth) / 2;
+        firstCalcSet.activeSpace.top = +(firstCalcSet.allHeight - firstCalcSet.screenHeight) / 2;
+        firstCalcSet.activeSpace.bot = +(firstCalcSet.allHeight - firstCalcSet.screenHeight) / 2;
+
+        joyArrows[0].children[0].textContent = +(firstCalcSet.allWidth - firstCalcSet.screenWidth) / 2;
+        joyArrows[2].children[0].textContent = +(firstCalcSet.allWidth - firstCalcSet.screenWidth) / 2;
+        joyArrows[1].children[0].textContent = +(firstCalcSet.allHeight - firstCalcSet.screenHeight) / 2;
+        joyArrows[3].children[0].textContent = +(firstCalcSet.allHeight - firstCalcSet.screenHeight) / 2;
+        
         
       });
     }
@@ -833,31 +838,32 @@ calcStepItem.forEach((elem,i) => {
     };
     calcPageI.addEventListener('click', calcPageIClick);
     
+    
 
 
     let calcAllHeight = () => {
       let calcPogon = +calcPage[i].querySelector('.hiddenPogon').textContent,
-          calcProfile = Math.round((firstCalcSet.allWidth * 2 + firstCalcSet.allHeight * 2) / 1000 * calcPogon),
+          calcProfile = Math.round(((+firstCalcSet.allWidth * 2) + (firstCalcSet.allHeight * 2)) / 1000 * +calcPogon),
           calcUgolok = +calcPage[i].querySelector('.hiddenUgol').textContent,
           calcRaboty = +calcPage[i].querySelector('.hiddenWork').textContent,
           calcRezka = +calcPage[i].querySelector('.hiddenLicevaya').textContent,
-          calcLicevaya = Math.round((firstCalcSet.allWidth * firstCalcSet.allHeight) / 10000 * calcRezka),
-          calcRezkaTilov = calcPage[i].querySelector('.hiddenTil').textContent,
-          calcTilovaya = Math.round((firstCalcSet.allWidth * firstCalcSet.allHeight) / 10000 * calcRezkaTilov),
+          calcLicevaya = Math.round((+firstCalcSet.allWidth * +firstCalcSet.allHeight) / 10000 * calcRezka),
+          calcRezkaTilov = +calcPage[i].querySelector('.hiddenTil').textContent,
+          calcTilovaya = Math.round((+firstCalcSet.allWidth * +firstCalcSet.allHeight) / 10000 * calcRezkaTilov),
           calcCostCronshtein = +calcPage[i].querySelector('.hiddenKron').textContent,
-          calcKronshtein = Math.round((calcCostCronshtein * firstCalcSet.allHeight) * 2);
+          calcKronshtein = Math.round((+calcCostCronshtein * +firstCalcSet.allHeight) * 2);
           calcKronshteinECost = +calcPage[i].querySelector('.hiddenKronE').textContent,
-          calcKronshteinEE = Math.round(calcKronshteinECost * 4),
+          calcKronshteinEE = Math.round(+calcKronshteinECost * 4),
           calcTypeOne = +calcPage[i].querySelector('.hiddenType1').textContent,
           calcTypeTwo = +calcPage[i].querySelector('.hiddenType2').textContent,
           calcTypeThree = +calcPage[i].querySelector('.hiddenType3').textContent;
           calcPaintCost = +calcPage[i].querySelector('.hiddenPaint').textContent,
-          calcPaint = Math.round((firstCalcSet.allWidth * firstCalcSet.allHeight) / 10000 * calcPaintCost),
+          calcPaint = Math.round((+firstCalcSet.allWidth * +firstCalcSet.allHeight) / 10000 * calcPaintCost),
           calcDiod = +calcPage[i].querySelector('.hiddenDiod').textContent,
           calcFloor = +calcPage[i].querySelector('.hiddenFloor').textContent,
           calcNoFloor = +calcPage[i].querySelector('.hiddenWall').textContent,
           calcSave = +calcPage[i].querySelector('.hiddenSave').textContent,
-          calcAll = Math.round(calcProfile + calcUgolok + calcRaboty + calcLicevaya + calcTilovaya + calcKronshtein + calcKronshteinEE),
+          calcAll = Math.round(+calcProfile + +calcUgolok + +calcRaboty + +calcLicevaya + +calcTilovaya + +calcKronshtein + +calcKronshteinEE),
           calcMarge = +calcPage[i].querySelector('.hiddenMarge').textContent;
 
       if (firstCalcSet.deepVal == 0) {
@@ -905,7 +911,29 @@ calcStepItem.forEach((elem,i) => {
       
 
       totalsCost.textContent = calcAll;
-      console.log(calcAll);
+
+     /*  console.log(calcPogon);
+    console.log(calcProfile);
+    console.log(calcUgolok);
+    console.log(calcRaboty);
+    console.log(calcRezka);
+    console.log(calcLicevaya);
+    console.log(calcRezkaTilov);
+    console.log(calcTilovaya);
+    console.log(calcCostCronshtein);
+    console.log(calcKronshtein);
+    console.log(calcKronshteinECost);
+    console.log(calcKronshteinEE);
+    console.log(calcTypeOne);
+    console.log(calcTypeTwo);
+    console.log(calcTypeThree);
+    console.log(calcPaintCost);
+    console.log(calcPaint);
+    console.log(calcDiod);
+    console.log(calcFloor);
+    console.log(calcNoFloor);
+    console.log(calcSave);
+    console.log(calcMarge); */
     };
 
 
