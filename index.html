@@ -353,8 +353,10 @@
       </div>
       <div class="calc-page__step">
         <div class="calc-inner__title">
-          <div class="num"><b>7</b> <h2>Рассчет стоимости</h2></div>
-          
+          <div class="num"><b>7</b> <h2>Контактная информация</h2></div>
+          <p>
+            Расчет стоимости заказа автоматически будет отправлен на указанную почту
+          </p>
         </div>
         <div class="calc-inner">
           <div class="calc-inner__left dop-wrapper">
@@ -364,20 +366,7 @@
                 <input class="input-data" type="text" placeholder="Контактное лицо">
                 <input class="input-data" type="tel" placeholder="+7 (___) ___-__-__">
                 <input class="input-data" type="email" placeholder="Ваш e-mail">
-                <div class="calc-form__num">
-                  <div>
-                    Укажите количество:
-                    <div class="num-trigger">?</div>
-                    <span>
-                      Действует система скидок при заказе: <br>
-                      от 5 до 10 ед - 3%<br>
-                      от 11 до 15 ед. - 5%<br>
-                      от 16 до 30 ед. - 7%<br>
-                      от 30 и более ед. - 10%<br>
-                    </span>
-                  </div>
-                  <input type="number" class="input-data corp-number" min="0" value="1">
-                </div>
+                
                 <div class="calc-form__buttons">
                   <button type="button" class="button-calculated" disabled>Получить расчет</button>
                 </div>
@@ -411,8 +400,28 @@
               <p class="calc-row"><b>Сверху: </b><span class="totals-atop">111</span></p>
               <p class="calc-row"><b>Снизу: </b><span class="totals-abot">111</span></p>
               <div class="calc-row__cost">
-                <h4 class="calc-row__count">Количество: <p class="totals-count">1</p> шт.</h4>
-                <h4>Итоговая стоимость: <strong><p class="totals-cost">111111</p>руб.</strong></h4>
+                <h4 class="calc-row__count">Количество: 
+                  <div class="calc-form__num calc-input-count">
+                    <div class="calc-input-count-buttons minus"></div>
+                    <input type="number" class="input-data corp-number" min="0" value="1">
+                    <div class="calc-input-count-buttons plus"></div>
+                    <p></p>
+                    <div clas="count-text">
+                      <div class="num-trigger">?</div>
+                      <span>
+                        Действует система скидок при заказе: <br>
+                        от 5 до 10 ед - 3%<br>
+                        от 11 до 15 ед. - 5%<br>
+                        от 16 до 30 ед. - 7%<br>
+                        от 30 и более ед. - 10%<br>
+                      </span>
+                    </div>
+                    
+                  </div>
+                </h4>
+                
+                <h4>Цена за еденицу: <strong><p class="single-cost">111111</p>руб.</strong></h4>
+                <h4>Цена за партию: <strong><p class="totals-cost">111111</p>руб.</strong></h4>
                 
               </div>
             </div>

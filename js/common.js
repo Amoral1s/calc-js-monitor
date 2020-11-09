@@ -18,10 +18,10 @@ const firstCalcSet = {
   paintTop: 0,
   paintBot: 0,
   dop: {
-    diod: 'Не нужна',
+    diod: 'Нет',
     diodVal: 0,
-    stand: 'Не нужно',
-    secur: 'Не нужна',
+    stand: 'Нет',
+    secur: 'Нет',
     securVal: 0,
     standVal: 0
   },
@@ -31,7 +31,7 @@ const firstCalcSet = {
     top: 35,
     bot: 35
   },
-  complNeed: 'Не нужны',
+  complNeed: 'Нет',
   count: 1
 }
 
@@ -105,14 +105,31 @@ calcStepItem.forEach((elem,i) => {
           totalsDopsave = calcPage[i].querySelector('.totals-dopsave'),
           totalsCount = calcPage[i].querySelector('.totals-count'),
           totalsCost = calcPage[i].querySelector('.totals-cost'),
+          numberMinus = calcPage[i].querySelector('.calc-input-count-buttons.minus'),
+          numberPlus = calcPage[i].querySelector('.calc-input-count-buttons.plus'),
           totalsComplects = calcPage[i].querySelector('.totals-complects');
 
+      if(numberPlus) {
+        numberPlus.addEventListener('click', () => {
+          corpNumber.value++;
+          firstCalcSet.count = corpNumber.value;
+        });
+        numberMinus.addEventListener('click', () => {
+
+          if( corpNumber.value <= 1) {
+            return
+          } else {
+            corpNumber.value--;
+            firstCalcSet.count = corpNumber.value;
+          }
+          
+        });
+      }
       if (corpNumber) {
         corpNumber.addEventListener('change', () => {
           firstCalcSet.count = corpNumber.value;
-          totalsCount.textContent = corpNumber.value;
-          console.log(corpNumber.value)
         });
+
       }
     const totalCost = () => {
       corpNumber.textContent;
@@ -175,12 +192,12 @@ calcStepItem.forEach((elem,i) => {
     if (complNoneButton) {
       complNoneButton.addEventListener('click', () => {
         if(complNoneButton.classList.contains('calc-dop-active')) {
-          firstCalcSet.complNeed = 'Не нужны';
+          firstCalcSet.complNeed = 'Нет';
           complNoneButton.classList.remove('calc-dop-active');
           complNeedButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
         } else {
-          firstCalcSet.complNeed = 'Не нужны';
+          firstCalcSet.complNeed = 'Нет';
           complNoneButton.classList.add('calc-dop-active');
           complNeedButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
@@ -190,13 +207,13 @@ calcStepItem.forEach((elem,i) => {
     if (complNeedButton) {
       complNeedButton.addEventListener('click', () => {
         if(complNeedButton.classList.contains('calc-dop-active')) {
-          firstCalcSet.complNeed = 'Нужны';
+          firstCalcSet.complNeed = 'Да';
           complNeedButton.classList.remove('calc-dop-active');
           complNoneButton.classList.remove('calc-dop-active');
 
           buttonNext.disabled = false; 
         } else {
-          firstCalcSet.complNeed = 'Нужны';
+          firstCalcSet.complNeed = 'Да';
           complNeedButton.classList.add('calc-dop-active');
           complNoneButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
@@ -206,12 +223,12 @@ calcStepItem.forEach((elem,i) => {
     if (dopDiodsButton) {
       dopDiodsButton.addEventListener('click', () => {
         if(dopDiodsButton.classList.contains('calc-dop-active')) {
-          firstCalcSet.dop.secur = 'Не нужна';
+          firstCalcSet.dop.secur = 'Нет';
           dopDiodsButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
           firstCalcSet.dop.diodVal = 0;
         } else {
-          firstCalcSet.dop.diod = 'Нужна';
+          firstCalcSet.dop.diod = 'Да';
           firstCalcSet.dop.diodVal = 1;
           dopDiodsButton.classList.add('calc-dop-active');
           buttonNext.disabled = false; 
@@ -222,7 +239,7 @@ calcStepItem.forEach((elem,i) => {
       dopStandButton.addEventListener('change', () => {
         dopStandButton.classList.add('calc-dop-active');
         if (dopStandButton.value == 0) {
-          firstCalcSet.dop.stand = 'Не нужно';
+          firstCalcSet.dop.stand = 'Нет';
           buttonNext.disabled = false; 
           dopStandButton.classList.remove('calc-dop-active');
           firstCalcSet.dop.standVal = 0;
@@ -237,7 +254,7 @@ calcStepItem.forEach((elem,i) => {
         }
          if (dopStandButton.value == 3) {
           buttonNext.disabled = false; 
-          firstCalcSet.dop.stand = 'Не нужно';
+          firstCalcSet.dop.stand = 'Нет';
           firstCalcSet.dop.standVal = 0;
         }
       });
@@ -245,13 +262,13 @@ calcStepItem.forEach((elem,i) => {
     if (dopSecurButton) {
       dopSecurButton.addEventListener('click', () => {
         if (dopSecurButton.classList.contains('calc-dop-active')) {
-          firstCalcSet.dop.secur = 'Не нужна';
+          firstCalcSet.dop.secur = 'Нет';
           dopSecurButton.classList.remove('calc-dop-active');
           buttonNext.disabled = false; 
           firstCalcSet.dop.securVal = 0;
 
         } else {
-          firstCalcSet.dop.secur = 'Нужна';
+          firstCalcSet.dop.secur = 'Да';
           dopSecurButton.classList.add('calc-dop-active');
           buttonNext.disabled = false; 
           firstCalcSet.dop.securVal = 1;
@@ -631,8 +648,8 @@ calcStepItem.forEach((elem,i) => {
       buttonRalNone.addEventListener('click', () => {
         firstCalcSet.paint = 'Покраска не нужна';
         firstCalcSet.paintVal = 0;
-        firstCalcSet.paintTop = 'нет';
-        firstCalcSet.paintBot = 'нет';
+        firstCalcSet.paintTop = 'Нет';
+        firstCalcSet.paintBot = 'Нет';
         buttonNext.disabled = false; 
         buttonRalNone.classList.add('button-active');
         ralBottomInput.value = '';
@@ -864,7 +881,10 @@ calcStepItem.forEach((elem,i) => {
           calcNoFloor = +calcPage[i].querySelector('.hiddenWall').textContent,
           calcSave = +calcPage[i].querySelector('.hiddenSave').textContent,
           calcAll = Math.round(+calcProfile + +calcUgolok + +calcRaboty + +calcLicevaya + +calcTilovaya + +calcKronshtein + +calcKronshteinEE),
-          calcMarge = +calcPage[i].querySelector('.hiddenMarge').textContent;
+          calcMarge = +calcPage[i].querySelector('.hiddenMarge').textContent,
+          singleCost = 0,
+          singleCostText = calcPage[i].querySelector('.single-cost');
+
 
       if (firstCalcSet.deepVal == 0) {
         calcAll = calcAll + +calcTypeOne;
@@ -911,29 +931,8 @@ calcStepItem.forEach((elem,i) => {
       
 
       totalsCost.textContent = calcAll;
-
-     /*  console.log(calcPogon);
-    console.log(calcProfile);
-    console.log(calcUgolok);
-    console.log(calcRaboty);
-    console.log(calcRezka);
-    console.log(calcLicevaya);
-    console.log(calcRezkaTilov);
-    console.log(calcTilovaya);
-    console.log(calcCostCronshtein);
-    console.log(calcKronshtein);
-    console.log(calcKronshteinECost);
-    console.log(calcKronshteinEE);
-    console.log(calcTypeOne);
-    console.log(calcTypeTwo);
-    console.log(calcTypeThree);
-    console.log(calcPaintCost);
-    console.log(calcPaint);
-    console.log(calcDiod);
-    console.log(calcFloor);
-    console.log(calcNoFloor);
-    console.log(calcSave);
-    console.log(calcMarge); */
+      singleCostText.textContent = Math.round(+calcAll / +firstCalcSet.count);
+    
     };
 
 
