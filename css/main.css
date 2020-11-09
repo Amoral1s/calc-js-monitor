@@ -1014,7 +1014,6 @@ body {
   padding: 5px;
   transform: skew(-30deg);
   transition: 0.3s;
-  z-index: 20;
   color: #000000;
   text-decoration: none;
 }
