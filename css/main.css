@@ -605,6 +605,9 @@ body {
   width: 540px;
   max-width: 540px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .calc-inner__right.calc-diag-arrows b {
