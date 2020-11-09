@@ -42,8 +42,12 @@ calcStepItem.forEach((elem,i) => {
     calcPage.forEach((elem) => {
       elem.style.display = 'none';
     });
-    myFadeIn(calcPage[i]);
+  
     
+    
+    if (i == 0) {
+    myFadeIn(calcPage[i]);
+
     const calcPageStepsStart = calcPage[i].querySelectorAll('.calc-page__step');
     calcPageStepsStart.forEach((elem) => {
       elem.style.display = 'none'
@@ -935,6 +939,7 @@ calcStepItem.forEach((elem,i) => {
     
     };
 
+    }
 
     //end
   }, { once: false });
@@ -977,7 +982,41 @@ function myFadeInFlex(el) {
 	}, 10);
 }
 
+const gifsWrap = document.querySelector('.gifs-wrap'),
+      gifs = document.querySelectorAll('.gifs div'),
+      closeds = document.querySelectorAll('.close'),
+      popups = document.querySelectorAll('.popup'),
+      overlayMain = document.querySelector('.overlay'),
+      popupGif = document.querySelector('.popup-gif'),
+      popup3D = document.querySelector('.popup-d');
 
+      gifs.forEach((elem, i) => {
+        elem.addEventListener('click', () => {
+          if (i == 0 || i == 2 || i == 4) {
+            myFadeIn(popupGif);
+            myFadeIn(overlayMain);
+          } else if (i == 1 || i == 3 || i == 5) {
+            myFadeIn(popup3D);
+            myFadeIn(overlayMain);
+          }
+        });
+      });
+
+      closeds.forEach((elem) => {
+        elem.addEventListener('click', () => {
+          popups.forEach((elem) => {
+            myFadeOut(elem);
+            myFadeOut(overlayMain);
+          })
+        });
+      });
+     
+      overlayMain.addEventListener('click', () => {
+        popups.forEach((elem) => {
+          myFadeOut(elem);
+          myFadeOut(overlayMain);
+        })
+      });
 
 
 
